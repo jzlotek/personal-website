@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 const routerOptions = [
   { path: '/', component: 'Home' },
+  { path: '/resume', component: 'Resume' },
   { path: '*', component: 'NotFound' }
 ]
 

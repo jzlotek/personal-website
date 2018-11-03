@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vue-container">
     <br/>
     Resume
   </div>

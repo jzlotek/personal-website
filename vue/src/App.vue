@@ -1,16 +1,24 @@
 <template>
   <div id="app">
-    <nav class="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/resume">Resume</router-link>
-    </nav>
-    <router-view/>
+    <!-- <router-view/> -->
+    <home/>
+    <resume/>
+    <nav-bar/>
   </div>
 </template>
 
 <script>
+import NavBar from './components/NavBar'
+import Resume from './components/Resume'
+import Home from './components/Home'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    NavBar,
+    Resume,
+    Home
+  }
 }
 </script>
 
@@ -30,5 +38,10 @@ export default {
 
   a {
     text-decoration: none;
+  }
+
+  .vue-container {
+    height: 100vh;
+    width: 100%;
   }
 </style>

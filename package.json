@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "if [ ! -d ./resume ]; then git clone https://github.com/jzlotek/resume.git ./resume; fi; cd resume && git pull && make && mv resume.pdf ../vue/src/assets/."
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
+}

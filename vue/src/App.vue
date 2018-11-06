@@ -22,9 +22,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss'>
+
   html {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: monaco, 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -40,6 +41,11 @@ export default {
     text-decoration: none;
   }
 
+  .nav-wrapper--open {
+    & .vue-container {
+      filter: blur(10px);
+    }
+  }
   .vue-container {
     height: 100vh;
     width: 100%;

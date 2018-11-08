@@ -33,26 +33,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@mixin hover-transition($property: color, $timing: 0.25s, $timing-function: ease-in-out) {
+  transition: $property $timing $timing-function;
+}
+
 .nav-wrapper {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: fixed;
   display: none;
   box-shadow: inset 0 0 0 100vh rgba(255,255,255,0.3);
 
-  .nav-wrapper--open & {
+  .nav-open & {
     display: block;
   }
 
   & .nav-inner {
+    height: inherit;
+    margin: 50px;
+    background: rgba(50,50,50,0.3);
+
     & .nav-ul {
       padding: 0;
       margin: 0;
+
       & .nav-li {
+        @include hover-transition($property: background);
+
+        display: inline-block;
+        width: 100%;
         list-style: none;
+        border-radius: 4px;
+        &:hover,
+        &:focus {
+          background: darkgray;
+
+          & .nav-link {
+            color: red;
+          }
+        }
+
         & .nav-link {
+          @include hover-transition();
+
+          padding: 15px 30px;
+          color: grey;
+          font-size: 5em;
           text-decoration: none;
         }
       }

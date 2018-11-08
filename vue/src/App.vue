@@ -41,9 +41,9 @@ export default {
     text-decoration: none;
   }
 
-  .nav-wrapper--open {
+  .nav-open {
     & .vue-container {
-      filter: blur(10px);
+      filter: blur(5px);
     }
   }
   .vue-container {

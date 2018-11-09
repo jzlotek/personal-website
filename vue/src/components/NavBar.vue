@@ -97,15 +97,20 @@ export default {
 
 @include breakpoint(desktop) {
   .nav-wrapper {
+    position: relative;
     display: block;
+    height: 10%;
 
     & .nav-inner {
+      height: 100%;
+      margin: 0;
 
       & .nav-ul {
 
         & .nav-li {
-
+          width: auto;
           & .nav-link {
+            font-size: 2em;
           }
         }
       }

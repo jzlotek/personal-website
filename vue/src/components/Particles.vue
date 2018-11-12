@@ -6,12 +6,15 @@
 </template>
 
 <script>
-import { Particle } from './particle'
+import { Particle } from './particle.js'
 import JQuery from 'jquery'
 let $ = JQuery
 
 export default {
   name: 'Particles',
+  components: {
+    Particle
+  },
   data () {
     return {
       particles: [],

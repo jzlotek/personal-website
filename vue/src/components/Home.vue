@@ -23,7 +23,7 @@
   padding: calc(50vh - 1.5em) calc(30vw);
   font-size: 3em;
   pointer-events: none;
-  
+
   & p {
     margin: 0;
     padding: 0 ;

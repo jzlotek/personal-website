@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import NavBar from './components/NavBar.vue'
+import NavBar from './components/NavBar'
+import { Particle } from './components/particle.js'
 
 Vue.config.productionTip = false
 
@@ -10,7 +11,8 @@ new Vue({
   el: '#app',
   router,
   components: {
-    NavBar
+    NavBar,
+    Particle
   },
   render: h => h(App)
 })

@@ -1,8 +1,8 @@
 {
-  "name": "frontend",
+  "name": "vue-frontend",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "John Zlotek <jzlotek@urbn.com>",
+  "author": "John Zlotek <jzlotek@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --hot --inline --progress --config build/webpack.dev.conf.js",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
+    "jquery": "^3.3.1",
     "node-sass": "^4.9.4",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.2",

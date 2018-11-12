@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoints';
+@import '../scss/1-global/1-global';
 
 @mixin hover-transition($property: color, $timing: 0.25s, $timing-function: ease-in-out) {
   transition: $property $timing $timing-function;
@@ -98,12 +98,14 @@ export default {
 @include breakpoint(desktop) {
   .nav-wrapper {
     position: relative;
-    display: block;
+    // display: block;
     height: 10%;
+    box-shadow: none;
 
     & .nav-inner {
       height: 100%;
       margin: 0;
+      background: none;
 
       & .nav-ul {
 

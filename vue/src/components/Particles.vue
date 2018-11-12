@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { Particle } from './particle.js'
+import { Particle } from '@/components/particle.js'
 import JQuery from 'jquery'
 let $ = JQuery
 

@@ -37,7 +37,7 @@
 </style>
 
 <script>
-import Particles from './Particles'
+import Particles from '@/components/Particles.vue'
 
 export default {
   name: 'Home',

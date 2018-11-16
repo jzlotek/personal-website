@@ -26,7 +26,7 @@ class RowData(SerializeableJSON):
         while field is not None:
             if isinstance(field, bs4.element.Tag):
                 if field.a is not None:
-                    self.row.append((field.text.strip(), field.a.get('href')))
+                    self.row.append([field.text.strip(), str(field.a.get('href'))])
                 else:
                     self.row.append(field.text.strip())
 
@@ -48,6 +48,17 @@ def to_dt(time):
     return str(datetime.time(hours, minutes if minutes < 60 else 59, 0, 0))
 
 
+def get_credits(page):
+    page = requests.get(page).text
+    page = bs4.BeautifulSoup(page, 'html.parser')
+    cred = page.find(class_ = "tableHeader", text="Credits").parent.find(class_ = "even")
+    cred = cred.text.strip()
+    enroll = page.find(class_ = "tableHeader", text="Enroll").parent.find(class_ = "odd")
+    enroll = int(enroll.text.strip())
+    max_enroll = page.find(class_ = "tableHeader", text="Max Enroll").parent.find(class_ = "even")
+    max_enroll = int(max_enroll.text.strip())
+    return [cred, enroll, max_enroll]
+
 def symboltime_to_datatime(time_range):
     time_range = time_range.split(' - ')
     time_range = map(to_dt, time_range)
@@ -61,6 +72,8 @@ class TMSClass(SerializeableJSON):
         self.IM = row.row[3]
         self.SEC = row.row[4]
         self.CRN = row.row[5]
+        if isinstance(self.CRN, list) and len(self.CRN) >= 2:
+            self.CRN[1] = (BASE_URL + self.CRN[1])
         self.CT = row.row[6]
         dt = row.row[7].split('\n')
         if len(dt) > 1:
@@ -72,6 +85,16 @@ class TMSClass(SerializeableJSON):
         else:
             self.DT = dt
         self.IN = row.row[8]
+        tmp = None
+        try:
+            info = get_credits(self.CRN[1])
+            tmp = float(info[0])
+            self.MAX = info[2]
+            self.ENROLL = info[1]
+        except:
+            tmp = ""
+
+        self.CR = tmp
 
 def get_college_page_sublinks(page):
     sublinks = []

@@ -1,11 +1,13 @@
 <template>
   <div class="vue-container">
-    <div class='p-wrapper'>
+    <router-view/>
+
+    <!-- <div class='p-wrapper'>
       <p>
         John Zlotek
       </p>
     </div>
-    <Particles/>
+    <Particles/> -->
   </div>
 </template>
 

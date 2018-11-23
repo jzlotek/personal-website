@@ -1,27 +1,27 @@
-from flask import Flask, render_template, jsonify
-import requests
-import bs4
-import json
-import re
+from flask import Flask, render_template
 import datetime
 import multiprocessing
 import os
-from python.tms_crawler import Crawler
+from crawler.tms_crawler import Crawler
 
-def run_crawler(crawler):
+
+def run_crawler(crawler: Crawler):
     try:
         crawler.crawl()
     except Exception as e:
-        print("\n{}\n\n{}\n".format(str(e.message), str(datetime.datetime.now())))
+        print("\n{}\n\n{}\n".format(str(e), str(datetime.datetime.now())))
+
 
 app = Flask(__name__,
-            static_folder="./dist/static",
-            template_folder="./dist")
+            static_folder="../dist/static",
+            template_folder="../dist")
+
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    return render_template("index.html")
+    return render_template("../dist/index.html")
+
 
 @app.route('/output.json')
 def get_output():
@@ -30,17 +30,18 @@ def get_output():
         mimetype='application/json'
     )
 
+
 if __name__ == '__main__':
     
-    crawler = Crawler()
+    main_crawler = Crawler()
 
-    crawler_process = multiprocessing.Process(target=run_crawler, args=[crawler])
+    crawler_process = multiprocessing.Process(target=run_crawler, args=[main_crawler])
     crawler_process.start()
 
     if '.tmp' not in os.listdir('./'):
         os.mkdir('./.tmp')
-
     try:
-        app.run()
+        app.run(debug=True)
     except Exception as e:
+        print(e)
         crawler_process.terminate()

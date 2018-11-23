@@ -2,7 +2,8 @@ import json
 import bs4
 import datetime
 import requests
-from constants import BASE_URL
+from crawler.constants import BASE_URL
+
 
 class Encoder(json.JSONEncoder):
     def default(self, obj):
@@ -11,9 +12,11 @@ class Encoder(json.JSONEncoder):
 
         return json.JSONEncoder.default(self, obj)
 
+
 class SerializeableJSON:
     def toJSON(self):
         return json.dumps(self.__dict__)
+
 
 class RowData(SerializeableJSON):
     def __init__(self, fields, index):
@@ -28,8 +31,10 @@ class RowData(SerializeableJSON):
                     self.row.append(field.text.strip())
 
             field = field.next_sibling
+
     def has_data(self):
         return len(self.row) > 0 and len(self.row[0]) > 0
+
 
 def to_dt(time):
     time = time.split(' ')
@@ -78,14 +83,13 @@ class TMSClass(SerializeableJSON):
         dt = row.row[7].split('\n')
         if len(dt) > 1:
             dt[1] = symboltime_to_datatime(dt[1])
-            self.DT = {
-                'days': dt[0],
-                'times': dt[1]
-            }
+            self.DT = dict(
+                days=dt[0],
+                times=dt[1]
+            )
         else:
             self.DT = dt
         self.IN = row.row[8]
-        tmp = None
         try:
             info = get_credits(self.CRN[1])
             tmp = float(info[0])

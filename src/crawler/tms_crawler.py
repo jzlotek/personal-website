@@ -2,15 +2,16 @@ import requests
 import bs4
 import json
 import threading
-from constants import BASE_URL
-from utility import SerializeableJSON, RowData, TMSClass, Encoder
+from crawler.constants import BASE_URL
+from crawler.utility import SerializeableJSON, RowData, TMSClass, Encoder
 
 def get_college_page_sublinks(page):
     sublinks = []
     for child in page.find('table', class_="collegePanel").children:
-        if child.find('div'):
+        if isinstance(child, bs4.element.Tag) and child.find('div'):
             curr = child.find('div')
-            while curr > 0:
+
+            while curr is not None:
                 anchor = curr.find('a')
                 if isinstance(anchor, bs4.element.Tag):
                     sublinks.append((anchor.text, anchor.get('href')))
@@ -33,6 +34,7 @@ def get_classes_on_college(page):
         )
     return classes
 
+
 def get_classes_on_page(page):
     page = BASE_URL + page
     page_request = requests.get(page)
@@ -49,19 +51,18 @@ def get_classes_on_page(page):
             child_tags.append(data)
             i += 1
 
-    child_tags = filter(lambda row: row.has_data(), child_tags)
-    child_tags = [json.loads(TMSClass(row).toJSON()) for row in child_tags]
+    child_tags = [TMSClass(row) for row in list(filter(lambda row: row.has_data(), child_tags))]
 
     return child_tags
 
-def get_colleges_thread_runner(page_url, class_section, class_list, threaded=False):
+
+def get_colleges_thread_runner(page_url, class_section, class_list, threaded=True):
     college_page = requests.get(BASE_URL + page_url).text
     college_page = bs4.BeautifulSoup(college_page, 'html.parser')
 
     if threaded:
         lock = threading.Lock()
         lock.acquire(True)
-    print(class_section)
     class_list.append(
         dict(
             collegeName=class_section, 
@@ -92,7 +93,6 @@ def get_colleges_from_side_left(page, threaded=False):
         for thread in threads:
             thread.join()
     
-    # print(json.dumps(class_list, indent=4))
     return class_list
 
 def get_quarters(page):
@@ -149,5 +149,5 @@ class Crawler:
 
             all_classes = get_colleges_from_side_left(page, threaded=True)
 
-            with open('./{}.json'.format(quarter[0]), 'w') as _file:
+            with open('./.tmp/{}.json'.format(quarter[0]), 'w') as _file:
                 _file.write(json.dumps(all_classes, cls=Encoder, indent=4))

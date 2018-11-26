@@ -64,7 +64,7 @@ def get_credits(page):
 
 def symboltime_to_datatime(time_range):
     time_range = time_range.split(' - ')
-    time_range = map(to_dt, time_range)
+    time_range = list(map(to_dt, time_range))
     return time_range
 
 

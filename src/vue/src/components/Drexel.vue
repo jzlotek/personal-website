@@ -32,7 +32,7 @@
 </template>
 
 <script>
-let c = require('../../../Wi-Q18_19.json')
+let c = require('../../../.tmp/Fa-Q18_19')
 let tmp = []
 
 c.forEach(o => {

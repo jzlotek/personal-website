@@ -2,8 +2,31 @@ import requests
 import bs4
 import json
 import threading
-from crawler.constants import BASE_URL
-from crawler.utility import SerializeableJSON, RowData, TMSClass, Encoder
+import datetime
+from crawler.constants import BASE_URL, GREEN, RESET, BOLD, BLUE
+from crawler.utility import RowData, TMSClass, Encoder
+
+
+def get_page(page, meta="", retries=3):
+    for _ in range(retries):
+        response = requests.get(page)
+
+        if response.status_code == 200:
+            break
+        else:
+            print('{}\nLink: {}\nStatus code: {}\n'.format(datetime.datetime.now(), page, response.status_code))
+    else:
+        return None
+
+    print('{blue}{bold}{}{reset}{green}{}s elapsed{reset}'.format(meta,
+                                                                  response.elapsed.total_seconds(),
+                                                                  green=GREEN,
+                                                                  reset=RESET,
+                                                                  bold=BOLD,
+                                                                  blue=BLUE))
+
+    return bs4.BeautifulSoup(response.text, 'html.parser')
+
 
 def get_college_page_sublinks(page):
     sublinks = []
@@ -24,8 +47,7 @@ def get_classes_on_college(page):
 
     sublinks = get_college_page_sublinks(page)
     for title, link in sublinks:
-        c = get_classes_on_page(link)
-        print(title)
+        c = get_classes_on_page(link, title)
         classes.append(
             dict(
                 classesCategory=title,
@@ -35,13 +57,12 @@ def get_classes_on_college(page):
     return classes
 
 
-def get_classes_on_page(page):
-    page = BASE_URL + page
-    page_request = requests.get(page)
-    if page_request.status_code != 200:
+def get_classes_on_page(page, title):
+    soup = get_page(BASE_URL + page, meta='{}: '.format(title))
+
+    if soup is None:
         return []
-    
-    soup = bs4.BeautifulSoup(page_request.text, 'html.parser')
+
     child_tags = []
 
     i = 0
@@ -51,14 +72,13 @@ def get_classes_on_page(page):
             child_tags.append(data)
             i += 1
 
-    child_tags = [TMSClass(row) for row in list(filter(lambda row: row.has_data(), child_tags))]
+    child_tags = [json.loads(TMSClass(row).toJSON()) for row in list(filter(lambda row: row.has_data(), child_tags))]
 
     return child_tags
 
 
 def get_colleges_thread_runner(page_url, class_section, class_list, threaded=True):
-    college_page = requests.get(BASE_URL + page_url).text
-    college_page = bs4.BeautifulSoup(college_page, 'html.parser')
+    college_page = get_page(BASE_URL + page_url, meta='{}: '.format(class_section))
 
     if threaded:
         lock = threading.Lock()
@@ -72,6 +92,7 @@ def get_colleges_thread_runner(page_url, class_section, class_list, threaded=Tru
 
     if threaded:
         lock.release()
+
 
 def get_colleges_from_side_left(page, threaded=False):
 
@@ -95,7 +116,8 @@ def get_colleges_from_side_left(page, threaded=False):
     
     return class_list
 
-def get_quarters(page):
+
+def get_links_to_terms(page):
     ret = []
     links = page.find_all('div', class_='term')
     for link in links:
@@ -105,21 +127,17 @@ def get_quarters(page):
     return ret
 
 
-
 class Crawler:
 
     def __init__(self):
         print("Created crawler: {}".format(str(self)))
+        self.quarters = []
         self.update()
     
     def update(self):
-        page = requests.get('https://termmasterschedule.drexel.edu/webtms_du/app')
-        if page.status_code != 200:
-            print("Error code: {}".format(page.status_code))
-            
-        page = bs4.BeautifulSoup(page.text, 'html.parser')
+        page = get_page('https://termmasterschedule.drexel.edu/webtms_du/app')
 
-        self.quarters = get_quarters(page)
+        self.quarters = get_links_to_terms(page)
 
     def crawl(self):
         for quarter in self.quarters:
@@ -132,20 +150,12 @@ class Crawler:
                                     .replace('Spring', 'Sp')
                                     .replace('Summer', 'Su')
                                     .split(' ')
-                                )
+                                 )
 
-            print(quarter[0])
-            for _ in range(3):
-                page = requests.get(BASE_URL + quarter[1])
+            page = get_page(BASE_URL + quarter[1], meta='{}: '.format(quarter[0]))
 
-                if page.status_code == 200:
-                    break
-                else:
-                    print(page.status_code)
-            else:
+            if page is None:
                 continue
-            
-            page = bs4.BeautifulSoup(page.text, 'html.parser')
 
             all_classes = get_colleges_from_side_left(page, threaded=True)
 

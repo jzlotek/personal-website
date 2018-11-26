@@ -9,7 +9,7 @@ def run_crawler(crawler: Crawler):
     try:
         crawler.crawl()
     except Exception as e:
-        print("\n{}\n\n{}\n".format(str(e), str(datetime.datetime.now())))
+        print('\n\n{}\n\n{}\n\n'.format(str(e), str(datetime.datetime.now())))
 
 
 app = Flask(__name__,
@@ -35,8 +35,9 @@ if __name__ == '__main__':
     
     main_crawler = Crawler()
 
-    crawler_process = multiprocessing.Process(target=run_crawler, args=[main_crawler])
-    crawler_process.start()
+    # crawler_process = multiprocessing.Process(target=run_crawler, args=[main_crawler])
+    # crawler_process.start()
+    main_crawler.crawl()
 
     if '.tmp' not in os.listdir('./'):
         os.mkdir('./.tmp')
@@ -44,4 +45,4 @@ if __name__ == '__main__':
         app.run(debug=True)
     except Exception as e:
         print(e)
-        crawler_process.terminate()
+        # crawler_process.terminate()

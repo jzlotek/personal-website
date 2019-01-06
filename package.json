@@ -1,8 +1,37 @@
 {
+  "name": "nuxt",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "John Zlotek <jzlotek@gmail.com>",
+  "private": true,
   "scripts": {
-    "build": "if [ ! -d ./resume ]; then git clone https://github.com/jzlotek/resume.git ./resume; fi; cd resume && git pull && make && mv resume.pdf ../vue/src/assets/."
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
   },
   "dependencies": {
-    "gulp": "^3.9.1"
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/fontawesome-svg-core": "^1.2.12",
+    "@fortawesome/free-solid-svg-icons": "^5.6.3",
+    "@fortawesome/vue-fontawesome": "^0.1.4",
+    "contentful": "^7.0.5",
+    "contentful-cli": "^0.18.0",
+    "node-sass": "^4.11.0",
+    "nuxt": "^2.0.0",
+    "nuxt-fontawesome": "^0.4.0",
+    "sass-loader": "^7.1.0",
+    "vue-fontawesome": "^0.0.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^4.0.0"
   }
 }

@@ -1,10 +1,4 @@
-const config = require('./.contentful.json')
 module.exports = {
-  // ./nuxt.config.js
-  env: {
-    CONTENTFUL_SPACE_ID: config.CONTENTFUL_SPACE_ID,
-    CONTENTFUL_ACCESS_TOKEN: config.CONTENTFUL_ACCESS_TOKEN,
-  },
   /*
   ** Headers of the page
   */

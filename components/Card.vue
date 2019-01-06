@@ -43,6 +43,7 @@ export default {
     @include breakpoint(mobile) {
         height: 100px;
         width: 100%;
+        margin-left: 0;
     }
 
 }

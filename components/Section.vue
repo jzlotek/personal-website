@@ -1,10 +1,13 @@
 <template>
   <section class="container">
-    <div :id="title" class="subcontainer">
+    <div :id="slug" class="subcontainer">
       <h1 class=" section__title title">{{title}}</h1>
       <p class="section__text subtitle">{{text}}</p>
       <div v-if="cardInfo">
         <Cards :cards="cardInfo"/>
+      </div>
+      <div v-if="file">
+          <img :src="file.fields.file.url"/>
       </div>
     </div>
   </section>
@@ -30,6 +33,14 @@ export default {
     cardInfo: {
       type: Array,
       required: false
+    },
+    slug: {
+      type: String,
+      required: true
+    },
+    file: {
+      type: Object,
+      required: false
     }
   }
 };
@@ -46,5 +57,9 @@ export default {
     text-align: left;
     font-size: 25px;
   }
+}
+
+img {
+  width: 100%;
 }
 </style>

@@ -6,6 +6,8 @@
       :title='section.fields.title'
       :text='section.fields.innerContent'
       :cardInfo="section.fields.cardInfo"
+      :slug="section.fields.slug"
+      :file="section.fields.file"
       />
   </div>
 </template>

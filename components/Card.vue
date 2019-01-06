@@ -40,14 +40,15 @@ export default {
     border-radius: 10px;    
     background: $bg2;
     padding: 10px;
-    @include breakpoint(mobile) {
+    @include breakpoint(tablet) {
         height: 100px;
+        width: 100%;
     }
 
 }
 .card__inner {
     display: inline-block;
-    @include breakpoint(mobile) {
+    @include breakpoint(tablet) {
         display: grid;
         text-align: left;
         grid-template-columns: auto auto;

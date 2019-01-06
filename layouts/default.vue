@@ -24,7 +24,6 @@ p {
 }
 
 i {
-  color: $posy;
   font-size: 10em;
   padding: 0 20px;
 }
@@ -32,6 +31,13 @@ i {
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+a {
+  color: $accent;
+  &:hover {
+    color: $accent2;
+  }
 }
 
 </style>

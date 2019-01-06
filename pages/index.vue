@@ -8,18 +8,21 @@
       </div>
     </section>
     <sections-body :sections="sections"/>
+    <Footer/>
   </section>
 </template>
 
 <script>
 import SectionsBody from '~/components/SectionsBody.vue';
+import Footer from '~/components/Footer.vue';
 import { createClient } from '../plugins/contentful';
 
 const client = createClient();
 
 export default {
   components: {
-    SectionsBody
+    SectionsBody,
+    Footer
   },
   asyncData ({env}) {
     return client.getEntries({

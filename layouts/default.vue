@@ -16,7 +16,14 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  background: $bg;
+  overflow-x: hidden;
+  background-color: $bg;
+}
+
+body {
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 p {
@@ -38,6 +45,7 @@ a {
   &:hover {
     color: $accent2;
   }
+  transition: 0.3s;
 }
 
 </style>

@@ -1,8 +1,8 @@
 <template>
   <section class="main">
-    <section class="container">
+    <section class="container parallax">
       <div>
-        <h1 class="title">
+        <h1 class="title title__main">
           John Zlotek
         </h1>
       </div>
@@ -39,6 +39,7 @@ export default {
 
 <style lang="scss">
 @import '../scss/1-global/constants';
+@import '../scss/1-global/_breakpoints.scss';
 
 .container {
   min-height: 100vh;
@@ -46,6 +47,12 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-color: $bg;
+
+  &__half {
+    border-radius: 0;
+    min-height: 50vh;
+  }
 }
 
 .subcontainer {
@@ -59,6 +66,14 @@ export default {
   font-size: 100px;
   color: $font;
   letter-spacing: 1px;
+  background-color: $bg;
+  border-radius: 10px;
+
+  &__main {
+    padding: 20px;
+    margin: 20px;
+  }
+
 }
 
 .subtitle {
@@ -75,6 +90,17 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.parallax {
+  background: linear-gradient(135deg, $accent, $accent2);
+  height: 20vh;
+  width: 100vw;
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>
 

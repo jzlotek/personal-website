@@ -1,16 +1,19 @@
 <template>
-  <section class="container">
-    <div :id="slug" class="subcontainer">
-      <h1 class=" section__title title">{{title}}</h1>
-      <p class="section__text subtitle">{{text}}</p>
-      <div v-if="cardInfo">
-        <Cards :cards="cardInfo"/>
+  <div>
+    <section class="container">
+      <div :id="slug" class="subcontainer">
+        <h1 class=" section__title title">{{title}}</h1>
+        <p class="section__text subtitle">{{text}}</p>
+        <div v-if="cardInfo">
+          <Cards :cards="cardInfo"/>
+        </div>
+        <div v-if="file">
+            <img :src="file.fields.file.url"/>
+        </div>
       </div>
-      <div v-if="file">
-          <img :src="file.fields.file.url"/>
-      </div>
-    </div>
-  </section>
+    </section>
+    <slot/>
+  </div>
 </template>
 
 <script>

@@ -46,9 +46,34 @@ export default {
         margin-left: 0;
     }
 
+    i {
+        color: $accent;
+    }
 }
 .card__inner {
     display: inline-block;
+    &::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    
+    .card__text {
+        margin-bottom: 5px;
+
+        @include breakpoint(mobile) {
+            font-size: 14px;
+            grid-column-start: 2;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 2;
+        }
+    }
+
+    i {
+        font-size: 130px;
+    }
+
     @include breakpoint(mobile) {
         display: grid;
         text-align: left;
@@ -57,13 +82,6 @@ export default {
         align-content: center;
         h2 {
             display: none;
-        }
-        .card__text {
-            font-size: 14px;
-            grid-column-start: 2;
-            grid-column-end: 3;
-            grid-row-start: 1;
-            grid-row-end: 2;
         }
         a {
             display: flex;

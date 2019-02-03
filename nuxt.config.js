@@ -1,3 +1,20 @@
+import { client } from './plugins/contentful';
+
+
+async function getBlogEntriesData() {
+  let { items } = await client.getEntries({
+    content_type: 'markdownSection',
+  });
+  items = items.map(section => {
+    return {
+      route: `/blog/${section.fields.slug}`,
+      payload: section.fields,
+    };
+  });
+
+  return items;
+}
+
 module.exports = {
   /*
   ** Headers of the page
@@ -13,6 +30,13 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.6.3/css/all.css' }
     ]
+  },
+  generate: {
+    routes: function (cb) {
+      getBlogEntriesData()
+        .then(res => {cb(null, res)})
+        .catch(cb);
+    },
   },
   /*
   ** Customize the progress bar color

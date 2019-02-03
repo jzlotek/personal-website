@@ -21,6 +21,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.4",
     "contentful": "^7.0.5",
     "contentful-cli": "^0.18.0",
+    "marked": "^0.6.0",
     "node-sass": "^4.11.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",

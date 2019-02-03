@@ -15,9 +15,8 @@
 <script>
 import SectionsBody from '~/components/SectionsBody.vue';
 import Footer from '~/components/Footer.vue';
-import { createClient } from '../plugins/contentful';
+import { client } from '../plugins/contentful';
 
-const client = createClient();
 
 export default {
   components: {

@@ -19,20 +19,11 @@ export default {
     return client.getEntries({
       content_type: 'markdownSection',
     }).then((sections) => {
-    return {
-      sections: sections.items
-    }
+      return {
+        sections: sections.items
+      }
     }).catch(e => console.error(e))
   },
-  methods: {
-    sectionMD(md) {
-      try {
-        return marked(md);
-      } catch (err) {
-        return md;
-      }
-    }
-  }
 }
 </script>
 

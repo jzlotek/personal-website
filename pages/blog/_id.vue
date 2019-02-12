@@ -2,7 +2,7 @@
     <div class="wrapper">
       <div class="content">
         <h1>{{ entry.title }}</h1>
-        <div :id="entry.slug"></div>
+        <div :id="entry.slug" v-html="md()"></div>
       </div>
     </div>
 </template>
@@ -30,8 +30,7 @@ export default {
   methods: {
     md() {
       try {
-        let m = marked(this.entry.markdown);
-        console.log(m)
+        const m = marked(this.entry.markdown);
         return m;
       } catch (err) {
         console.log(err)
@@ -39,9 +38,6 @@ export default {
       }
     },
   },
-  mounted() {
-    document.getElementById(this.entry.slug).innerHTML = this.md();
-  }
 }
 </script>
 

@@ -41,10 +41,35 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../scss/1-global/constants';
 
 * {
   color: $font;
 }
+
+h1 {
+
+}
+
+h2 {
+
+}
+
+h3 {
+
+}
+
+p {
+
+}
+
+a {
+
+}
+
+img {
+
+}
+
 </style>

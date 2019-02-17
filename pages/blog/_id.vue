@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
+      <h1 class="title">{{ entry.title }}</h1>
       <div class="content">
-        <h1>{{ entry.title }}</h1>
         <div :id="entry.slug" v-html="md()"></div>
       </div>
     </div>
@@ -41,35 +41,58 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '../../scss/1-global/breakpoints';
 @import '../../scss/1-global/constants';
 
 * {
   color: $font;
 }
+.wrapper {
 
-h1 {
+  .title {
+    padding: 20px;
+  }
 
-}
+  .content {
+    width: 50%;
+    margin: 50px auto;
+    @include breakpoint(mobile) {
+      width: 200px;
+    }
 
-h2 {
+    h1 {
+      padding: 10px;
+      color: $accent-bold2;
+    }
 
-}
+    h2 {
+      padding: 5px;
+    }
 
-h3 {
+    h3 {
 
-}
+    }
 
-p {
+    p {
+      text-indent: 2em;
+      padding: 10px;
+    }
 
-}
+    a {
+      text-indent: 0;
+      text-decoration: none;
+      color: $accent-bold2;
 
-a {
+      &::hover {
+        color: lighten($accent-bold2, 10%);
+      }
+    }
 
-}
+    img {
 
-img {
-
+    }
+  }
 }
 
 </style>

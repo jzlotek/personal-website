@@ -2,6 +2,7 @@
     $desktop-min: 900px;
     $tablet-min: 768px;
     $mobile-min: 480px;
+    $mobile-small: 320px;
     
     @if $size == 'mobile' {
         @media only screen and (max-width: $mobile-min) {
@@ -14,6 +15,10 @@
     } @else if $size == 'desktop' {
         @media only screen and (min-width: $desktop-min) {
             @content;
+        }
+    } @else if $size == 'mobile-sm' {
+        @media only screen and (max-width: $mobile-small) {
+            @content
         }
     }
 }

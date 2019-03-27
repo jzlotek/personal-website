@@ -6,9 +6,21 @@ html {
         text-decoration: none;
         color: $text-color;
         transition: 0.3s;
+        cursor: pointer;
         
         &:hover {
             color: $link-hover;
         }
+    }
+}
+
+.text {
+    &__p {
+        font-size: 1rem;
+        color: $font2;
+    }
+    &__header {
+        font-size: 1.5rem;
+        color: $font;
     }
 }

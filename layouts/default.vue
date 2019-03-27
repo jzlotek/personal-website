@@ -1,10 +1,9 @@
 <template>
   <div class="main">
     <a class="nav-toggle" @click="toggleNav()">
-      <i class="fas fa-align-right" :class="{hide: navVisible}"/>
-      <i class="far fa-times-circle" :class="{hide: !navVisible}"/>
+      <i class="fas fa-align-right fa-icon" :class="{hide: navVisible}"/>
     </a>
-    <section class="nav-outer">
+    <section class="nav-outer" :class="{'nav-visible': navVisible}">
       <Nav/>
     </section>
     <section class="main-container">
@@ -69,15 +68,12 @@ export default {
       position: absolute;
       margin: 20px;
       font-size: 50px;
+      top: 0;
       right: 0;
     }
 
     i {
       transition-duration: 0.3s;
-    }
-
-    .hide {
-      display: none;
     }
   }
 
@@ -86,13 +82,16 @@ export default {
     display: flex;
 
     @include breakpoint(mobile) {
-      display: none;
-      width: 100%;
+      position: absolute;
+      width: 100vw;
       background-color: $background;
+      opacity: 0;
+      transform: translate(-100vw);
 
       &.nav-visible {
-        display: flex;
-        position: absolute;
+        transition: all 0.3s linear;
+        transform: translate(0);
+        opacity: 1;
       }
     }
 
@@ -100,6 +99,10 @@ export default {
       grid-column-start: 1;
     }
   }
+}
+
+.hide {
+  display: none;
 }
 </style>
 

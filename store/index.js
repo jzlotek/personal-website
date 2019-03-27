@@ -1,4 +1,5 @@
 export const TOGGLE_NAV = 'TOGGLE_NAV';
+export const SET_NAV = 'SET_NAV';
 export const NAV_VISIBLE = 'NAV_VISIBLE';
 
 export const state = () => ({
@@ -8,5 +9,8 @@ export const state = () => ({
 export const mutations = {
     [TOGGLE_NAV](state) {
         state.NAV_VISIBLE = !state.NAV_VISIBLE;
+    },
+    [SET_NAV](state, opt) {
+        state.NAV_VISIBLE = opt;
     },
 }

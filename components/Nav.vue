@@ -4,10 +4,17 @@
             <NavLink path='/' title='Home'/>
             <NavLink path='/about' title='About'/>
         </ul>
+        <a class="nav-toggle" @click="toggleNav()">
+            <i class="far fa-times-circle fa-icon" :class="{hide: !navVisible}"/>
+        </a>
     </section>
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
+
+import { TOGGLE_NAV, NAV_VISIBLE } from '../store';
+
 import NavLink from './NavLink';
 
 export default {
@@ -15,6 +22,16 @@ export default {
     components: {
         NavLink,
     },
+    computed: {
+        ...mapState({
+            navVisible: NAV_VISIBLE,
+        })
+    },
+    methods: {
+        ...mapMutations({
+            toggleNav: TOGGLE_NAV,
+        }),
+    }
 }
 </script>
 
@@ -23,10 +40,13 @@ export default {
 @import '../scss/1-global/breakpoints';
 .nav {
     &-container {
-        // position: absolute;
-        @include breakpoint(desktop) {
-            display: grid;
-            align-content: center;
+        display: grid;
+        align-content: center;
+        
+        @include breakpoint(mobile) {
+            width: 100vw;
+        }
+        @include breakpoint(desktop) {    
             min-width: 150px;
         }
     }

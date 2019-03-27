@@ -25,23 +25,23 @@
 </template>
 
 <script>
-import { client } from '../plugins/contentful';
+// import { client } from '../plugins/contentful';
 import CircleLinksContainer from '../components/CircleLinksContainer';
 
 export default {
   components: {
     CircleLinksContainer,
   },
-  asyncData ({env}) {
-    return client.getEntries({
-          content_type: 'section',
-          order: 'fields.pos',
-      }).then((sections) => {
-      return {
-        sections: sections.items
-      }
-    }).catch(e => console.error(e))
-  },
+  // asyncData ({env}) {
+  //   return client.getEntries({
+  //         content_type: 'section',
+  //         order: 'fields.pos',
+  //     }).then((sections) => {
+  //     return {
+  //       sections: sections.items
+  //     }
+  //   }).catch(e => console.error(e))
+  // },
 }
 </script>
 

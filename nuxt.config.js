@@ -32,11 +32,11 @@ module.exports = {
     ]
   },
   generate: {
-    routes: function (cb) {
-      getBlogEntriesData()
-        .then(res => {cb(null, res)})
-        .catch(cb);
-    },
+    // routes: function (cb) {
+    //   getBlogEntriesData()
+    //     .then(res => {cb(null, res)})
+    //     .catch(cb);
+    // },
   },
   /*
   ** Customize the progress bar color

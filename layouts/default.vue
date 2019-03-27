@@ -72,6 +72,10 @@ export default {
       right: 0;
     }
 
+    i {
+      transition-duration: 0.3s;
+    }
+
     .hide {
       display: none;
     }

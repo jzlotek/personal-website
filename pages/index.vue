@@ -1,27 +1,36 @@
 <template>
-  <section class="main">
-    <section class="container parallax">
-      <div>
-        <h1 class="title title__main">
-          John Zlotek
+  <div class="content">
+    <div class="content-text">
+      <section class="content-text__section">
+        <h1 class="text__header">
+          Hi!
         </h1>
-      </div>
-    </section>
-    <sections-body :sections="sections"/>
-    <Footer/>
-  </section>
+        <p class="text__p">
+          I'm John Zlotek. I am a computer science graduate student at Drexel University.
+        </p>
+      </section>
+      <section class="content-text__section">
+        <p class="text__p">
+          I enjoy coffee, coding, and technology.
+        </p>
+      </section>
+      <section class="content-text__section">
+        <p class="text__p">
+          I am currently a teching assistant for CS265 (Advanced Programming Techniques) at Drexel.
+        </p>
+      </section>
+    </div>
+    <CircleLinksContainer />
+  </div>
 </template>
 
 <script>
-import SectionsBody from '~/components/SectionsBody.vue';
-import Footer from '~/components/Footer.vue';
 import { client } from '../plugins/contentful';
-
+import CircleLinksContainer from '../components/CircleLinksContainer';
 
 export default {
   components: {
-    SectionsBody,
-    Footer
+    CircleLinksContainer,
   },
   asyncData ({env}) {
     return client.getEntries({
@@ -38,68 +47,28 @@ export default {
 
 <style lang="scss">
 @import '../scss/1-global/constants';
-@import '../scss/1-global/_breakpoints.scss';
+@import '../scss/1-global/breakpoints';
 
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: $bg;
-
-  &__half {
-    border-radius: 0;
-    min-height: 50vh;
-  }
-}
-
-.subcontainer {
-  margin: 10vh 10vw;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+.content {
+  height: 100vh;
   display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: $font;
-  letter-spacing: 1px;
-  background-color: $bg;
-  border-radius: 10px;
 
-  &__main {
-    padding: 20px;
-    margin: 20px;
+  @include breakpoint(desktop) {
+    position: relative;
   }
 
-}
+  &-text {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    padding: 150px 50px 0px;
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: $font2;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
+    &__section {
 
-.subsubtitle {
-  font-size: 32px;
-}
-
-.links {
-  padding-top: 15px;
-}
-
-.parallax {
-  background: linear-gradient(135deg, $accent, $accent2);
-  height: 20vh;
-  width: 100vw;
-
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    }
+  }
 }
 </style>
 

@@ -1,52 +1,116 @@
 <template>
-  <div>
-    <nuxt/>
+  <div class="main">
+    <a class="nav-toggle" @click="toggleNav()">
+      <i class="fas fa-align-right fa-icon" :class="{hide: navVisible}"/>
+    </a>
+    <section class="nav-outer" :class="{'nav-visible': navVisible}">
+      <Nav/>
+    </section>
+    <section class="main-container">
+      <nuxt/>
+    </section>
   </div>
 </template>
 
+<script>
+import { mapMutations, mapState } from 'vuex';
+
+import { TOGGLE_NAV, NAV_VISIBLE, SET_NAV } from '../store';
+
+import Nav from '../components/Nav';
+
+export default {
+  name: 'Default',
+  components: {
+    Nav,
+  },
+  computed: {
+    ...mapState({
+      navVisible: NAV_VISIBLE,
+    })
+  },
+  methods: {
+    ...mapMutations({
+      toggleNav: TOGGLE_NAV,
+      setNav: SET_NAV,
+    }),
+  },
+  watch: {
+    $route() {
+      this.setNav(false);
+    }
+  }
+}
+</script>
+
+
 <style lang="scss">
-@import '../scss/1-global/constants';
+@import '../scss/1-global/1-global';
 
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  background-color: $bg;
+.main {
+  background-color: $background;
+  height: 100vh;
+  
+  @include breakpoint(desktop) {
+    display: grid;
+    grid-auto-columns: 20% 80%;
+  }
+
+  &-container {
+    height: 100vh;
+    background-color: $background-dark;
+    grid-column-start: 2;
+  }
 }
 
-body {
-  &::-webkit-scrollbar {
+.nav {
+
+  &-toggle {
     display: none;
+    transition: 0.5ms;
+
+    @include breakpoint(mobile) {
+      display: flex;
+      position: absolute;
+      z-index: 1000;
+      margin: 20px;
+      font-size: 50px;
+      top: 0;
+      right: 0;
+    }
+
+    i {
+      transition-duration: 0.3s;
+    }
+  }
+
+  &-outer {
+    height: 100vh;
+    display: flex;
+
+    @include breakpoint(mobile) {
+      position: absolute;
+      z-index: 5000;
+      width: 100vw;
+      background-color: $background;
+      opacity: 0;
+      transform: translate(-100vw);
+
+      &.nav-visible {
+        transition: all 0.3s linear;
+        transform: translate(0);
+        opacity: 1;
+      }
+    }
+
+    @include breakpoint(desktop) {
+      grid-column-start: 1;
+    }
   }
 }
 
-p {
-  color: $font2;
+.hide {
+  display: none;
 }
-
-i {
-  font-size: 10em;
-  padding: 0 20px;
-}
-
-*, *:before, *:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-a {
-  color: $accent;
-  &:hover {
-    color: $accent2;
-  }
-  transition: 0.3s;
-}
-
 </style>
 

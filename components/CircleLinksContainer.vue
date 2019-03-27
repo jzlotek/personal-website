@@ -36,6 +36,7 @@ export default {
     bottom: 20px;
     width: 100%;
   }
+
   &-outer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

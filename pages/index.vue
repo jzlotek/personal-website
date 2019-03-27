@@ -52,7 +52,10 @@ export default {
 .content {
   height: 100vh;
   display: block;
-  position: relative;
+
+  @include breakpoint(desktop) {
+    position: relative;
+  }
 
   &-text {
     display: grid;

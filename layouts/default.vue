@@ -15,7 +15,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex';
 
-import { TOGGLE_NAV, NAV_VISIBLE } from '../store';
+import { TOGGLE_NAV, NAV_VISIBLE, SET_NAV } from '../store';
 
 import Nav from '../components/Nav';
 
@@ -32,7 +32,13 @@ export default {
   methods: {
     ...mapMutations({
       toggleNav: TOGGLE_NAV,
+      setNav: SET_NAV,
     }),
+  },
+  watch: {
+    $route() {
+      this.setNav(false);
+    }
   }
 }
 </script>
@@ -66,6 +72,7 @@ export default {
     @include breakpoint(mobile) {
       display: flex;
       position: absolute;
+      z-index: 1000;
       margin: 20px;
       font-size: 50px;
       top: 0;
@@ -83,6 +90,7 @@ export default {
 
     @include breakpoint(mobile) {
       position: absolute;
+      z-index: 5000;
       width: 100vw;
       background-color: $background;
       opacity: 0;

@@ -1,15 +1,12 @@
 <template>
     <li class="nav-link">
-        <nuxt-link :to="path" @click="toggleNav()">
+        <nuxt-link :to="path">
             {{ title }} <i v-if="$route.path === path" class="fas fa-chevron-left"/>
         </nuxt-link>
     </li>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-import { SET_NAV } from '../store';
-
 export default {
     name: 'NavLink',
     props: {
@@ -22,17 +19,6 @@ export default {
             required: true,
         }
     },
-    methods: {
-        ...mapMutations({
-            setNav: SET_NAV,
-        }),
-        toggleNav() {
-            console.log(window)
-            if (window.innerWidth <= 900) {
-                this.setNav(false);
-            }
-        }
-    }
 }
 </script>
 

@@ -1,64 +1,100 @@
-import { client } from './plugins/contentful';
+import pkg from "./package";
+import { client } from "./plugins/contentful";
 
-
-async function getBlogEntriesData() {
+async function getPostsEntries() {
   let { items } = await client.getEntries({
-    content_type: 'markdownSection',
+    content_type: "markdownSection"
   });
-  items = items.map(section => {
-    return {
-      route: `/blog/${section.fields.slug}`,
-      payload: section.fields,
-    };
-  });
-
-  return items;
+  return [
+    {
+      route: "/posts",
+      payload: items
+    },
+    ...items.map(section => {
+      return {
+        route: `/posts/${section.fields.slug}`,
+        payload: section.fields
+      };
+    })
+  ];
 }
 
-module.exports = {
+export default {
+  mode: "spa",
+
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    title: 'John Zlotek',
+    title: "John Zlotek's Site",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'John Zlotek\'s personal website' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.6.3/css/all.css' }
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      }
     ]
   },
-  generate: {
-    // routes: function (cb) {
-    //   getBlogEntriesData()
-    //     .then(res => {cb(null, res)})
-    //     .catch(cb);
-    // },
+
+  /*
+   ** Customize the progress-bar color
+   */
+  loading: { color: "#fff" },
+
+  /*
+   ** Global CSS
+   */
+  css: [],
+
+  /*
+   ** Plugins to load before mounting the App
+   */
+  plugins: ["./plugins/contentful"],
+
+  /*
+   ** Nuxt.js modules
+   */
+  modules: [
+    // Doc: https://axios.nuxtjs.org/usage
+    "@nuxtjs/axios",
+    "@nuxtjs/pwa"
+  ],
+  /*
+   ** Axios module configuration
+   */
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
   },
+
+  generate: {
+    routes: function() {
+      getPostsEntries().then(res => res);
+    }
+  },
+
   /*
-  ** Customize the progress bar color
-  */
-  loading: { color: '#3B8070' },
-  /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** Run ESLint on save
-    */
-    extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
-          enforce: 'pre',
+          enforce: "pre",
           test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
+          loader: "eslint-loader",
           exclude: /(node_modules)/
-        })
+        });
       }
     }
   }
-}
-
+};

@@ -6,7 +6,8 @@
           Hi!
         </h1>
         <p class="text__p">
-          I'm John Zlotek. I am a computer science graduate student at Drexel University.
+          I'm John Zlotek. I am a computer science graduate student at Drexel
+          University.
         </p>
       </section>
       <section class="content-text__section">
@@ -16,7 +17,8 @@
       </section>
       <section class="content-text__section">
         <p class="text__p">
-          I am currently a teching assistant for CS265 (Advanced Programming Techniques) at Drexel.
+          I am currently a teching assistant for CS265 (Advanced Programming
+          Techniques) at Drexel.
         </p>
       </section>
     </div>
@@ -26,12 +28,12 @@
 
 <script>
 // import { client } from '../plugins/contentful';
-import CircleLinksContainer from '../components/CircleLinksContainer';
+import CircleLinksContainer from "../components/CircleLinksContainer";
 
 export default {
   components: {
-    CircleLinksContainer,
-  },
+    CircleLinksContainer
+  }
   // asyncData ({env}) {
   //   return client.getEntries({
   //         content_type: 'section',
@@ -42,16 +44,17 @@ export default {
   //     }
   //   }).catch(e => console.error(e))
   // },
-}
+};
 </script>
 
 <style lang="scss">
-@import '../scss/1-global/constants';
-@import '../scss/1-global/breakpoints';
+@import "../scss/1-global/constants";
+@import "../scss/1-global/breakpoints";
 
 .content {
   height: 100vh;
   display: block;
+  width: 100%;
 
   @include breakpoint(desktop) {
     position: relative;
@@ -66,9 +69,7 @@ export default {
     padding: 150px 50px 0px;
 
     &__section {
-
     }
   }
 }
 </style>
-

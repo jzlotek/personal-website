@@ -1,8 +1,12 @@
-const contentful = require('contentful');
+const contentful = require("contentful");
+let c = null;
 
-const config = {
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-};
+if (process.env.CONTENTFUL_ACCESS_TOKEN && process.env.CONTENTFUL_SPACE_ID) {
+  const config = {
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+  };
+  c = contentful.createClient(config);
+}
 
-export const client = contentful.createClient(config);
+export const client = c;

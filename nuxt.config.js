@@ -1,26 +1,9 @@
 import pkg from "./package";
+
 import { client } from "./plugins/contentful";
 
-async function getPostsEntries() {
-  let { items } = await client.getEntries({
-    content_type: "markdownSection"
-  });
-  return [
-    {
-      route: "/posts",
-      payload: items
-    },
-    ...items.map(section => {
-      return {
-        route: `/posts/${section.fields.slug}`,
-        payload: section.fields
-      };
-    })
-  ];
-}
-
 export default {
-  mode: "spa",
+  // mode: "spa",
 
   /*
    ** Headers of the page
@@ -55,7 +38,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["./plugins/contentful"],
+  plugins: [],
 
   /*
    ** Nuxt.js modules
@@ -73,9 +56,25 @@ export default {
   },
 
   generate: {
-    routes: function() {
-      getPostsEntries().then(res => res);
-    }
+    routes: () => client.getEntries({
+      content_type: "markdownSection"
+    })
+    .then((res) => {
+      const items = res.items;
+        const routeList = [
+          {
+            route: "/posts",
+            payload: items,
+          },
+          ...items.map((section) => {
+            return {
+              route: `/posts/${section.fields.slug}`,
+              payload: section.fields,
+            };
+          })
+        ];
+        return routeList;
+      })
   },
 
   /*

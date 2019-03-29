@@ -6,7 +6,7 @@
           Posts
         </h1>
         <ul>
-          <li v-for="item in sections" :key="item">
+          <li v-for="(item, index) in sections" :key="index">
             <NavLink
               :path="`/posts/${item.fields.slug}`"
               :title="item.fields.title"
@@ -33,14 +33,9 @@ export default {
   },
   async asyncData({ env, payload }) {
     if (payload) {
-      console.log("has payload");
       return {
         sections: payload.items
       };
-    }
-    if (!client) {
-      console.log("no client");
-      return {};
     }
     return client
       .getEntries({

@@ -3,8 +3,8 @@ let c = null;
 
 if (process.env.CONTENTFUL_ACCESS_TOKEN && process.env.CONTENTFUL_SPACE_ID) {
   const config = {
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+    space: String(process.env.CONTENTFUL_SPACE_ID).trim(),
+    accessToken: String(process.env.CONTENTFUL_ACCESS_TOKEN).trim()
   };
   c = contentful.createClient(config);
 }

@@ -16,17 +16,12 @@ marked.setOptions({
 
 export default {
   async asyncData({ params, error, payload }) {
-    console.log(payload);
-    return {
-      entry: payload
-    };
     let entry = await client.getEntries({
       content_type: "markdownSection",
       "fields.slug": params.slug
     });
 
     entry = entry.items[0].fields;
-    console.log(entry);
     return {
       entry: entry
     };

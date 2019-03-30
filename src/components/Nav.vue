@@ -2,8 +2,8 @@
   <section class="nav-container">
     <ul class="nav-ul">
       <NavLink path="/" title="Home" />
-      <NavLink path="/posts" title="Posts" />
-      <NavLink path="/about" title="About" />
+      <NavLink path="/posts" title="Posts"/>
+      <NavLink path="/about" title="About"/>
     </ul>
     <a class="nav-toggle" @click="toggleNav()">
       <i class="far fa-times-circle fa-icon" :class="{ hide: !navVisible }" />
@@ -30,9 +30,9 @@ export default {
   },
   methods: {
     ...mapMutations({
-      toggleNav: TOGGLE_NAV
+      toggleNav: TOGGLE_NAV,
     })
-  }
+  },
 };
 </script>
 

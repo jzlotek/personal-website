@@ -7,7 +7,7 @@
       <Nav />
     </section>
     <section class="main-container">
-      <nuxt />
+      <slot />
     </section>
   </div>
 </template>
@@ -15,7 +15,7 @@
 <script>
 import { mapMutations, mapState } from "vuex";
 
-import { TOGGLE_NAV, NAV_VISIBLE, SET_NAV } from "../store";
+import { TOGGLE_NAV, NAV_VISIBLE } from "../store";
 
 import Nav from "../components/Nav";
 
@@ -32,13 +32,7 @@ export default {
   methods: {
     ...mapMutations({
       toggleNav: TOGGLE_NAV,
-      setNav: SET_NAV
     })
-  },
-  watch: {
-    $route() {
-      this.setNav(false);
-    }
   }
 };
 </script>
@@ -59,6 +53,7 @@ export default {
     height: 100vh;
     background-color: $background-dark;
     grid-column-start: 2;
+    overflow-y: auto;
   }
 }
 
@@ -109,5 +104,27 @@ export default {
 
 .hide {
   display: none;
+}
+
+.content {
+  height: 100vh;
+  display: block;
+  width: 100%;
+
+  @include breakpoint(desktop) {
+    position: relative;
+  }
+
+  &-text {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    padding: 150px 50px 0px;
+
+    &__section {
+    }
+  }
 }
 </style>

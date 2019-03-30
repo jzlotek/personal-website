@@ -31,6 +31,9 @@ import CircleLinksContainer from '../components/CircleLinksContainer';
 
 export default {
     name: 'About',
+    metaInfo: {
+        title: 'About'
+    },
     components: {
         CircleLinksContainer,
     }

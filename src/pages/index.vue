@@ -32,12 +32,11 @@
 import CircleLinksContainer from "../components/CircleLinksContainer";
 
 export default {
+  metaInfo: {
+    title: 'Home'
+  },
   components: {
     CircleLinksContainer
   }
 };
 </script>
-
-<style lang="scss">
-
-</style>

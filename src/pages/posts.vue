@@ -43,6 +43,9 @@ import NavLink from "../components/NavLink";
 
 export default {
   name: "Posts",
+  metaInfo: {
+    title: 'Posts'
+  },
   components: {
     NavLink
   },

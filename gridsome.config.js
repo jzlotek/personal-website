@@ -6,5 +6,5 @@
 
 module.exports = {
   siteName: 'John Zlotek\'s Site',
-  plugins: []
+  plugins: [],
 }

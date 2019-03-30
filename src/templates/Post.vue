@@ -32,6 +32,11 @@ marked.setOptions({
 });
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$page.post.title,
+    }
+  },
   methods: {
     md(m) {
       try {

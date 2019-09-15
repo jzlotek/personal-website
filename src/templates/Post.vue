@@ -12,7 +12,7 @@
 </template>
 
 <page-query>
-query Post ($id: String! $visible: true) {
+query Post ($id: String!) {
   post(id: $id) {
     title
     path

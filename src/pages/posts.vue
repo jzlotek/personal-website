@@ -9,7 +9,6 @@
           <ul>
             <li v-for="(item, index) in $page.allPost.edges" :key="index">
               <NavLink
-                :v-if="item.node.visible"
                 :path="`${item.node.path}`"
                 :title="item.node.title"
               />

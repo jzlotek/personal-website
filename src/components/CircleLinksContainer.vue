@@ -11,7 +11,7 @@
         />
         <LinkCircle
           icon="fas fa-file-pdf"
-          url="https://github.com/jzlotek/resume"
+          url="https://github.com/jzlotek/resume/raw/master/resume.pdf"
         />
       </div>
     </div>

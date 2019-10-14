@@ -7,5 +7,21 @@
 module.exports = {
   siteName: 'John Zlotek\'s Site',
   siteDescription: 'John Zlotek\'s personal website',
-  plugins: [],
+  plugins: [
+      {
+        use: 'gridsome-plugin-pwa',
+        options: {
+            title: 'johnzlotek.xyz',
+            startUrl: '/',
+            display: 'standalone',
+            statusBarStyle: 'default',
+            manifestPath: 'manifest.json',
+            serviceWorkerPath: 'service-worker.js',
+            shortName: 'jzxyz',
+            themeColor: '#666600',
+            backgroundColor: '#ffffff',
+            icon: 'src/favicon.png'
+        }
+    }
+  ],
 }

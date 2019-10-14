@@ -1,5 +1,5 @@
 {
-  "name": "personal-site2",
+  "name": "personal-site",
   "private": true,
   "scripts": {
     "build": "gridsome build",
@@ -9,7 +9,9 @@
   "dependencies": {
     "@gridsome/source-contentful": "^0.2.1",
     "contentful": "^7.5.0",
+    "dotenv": "^8.1.0",
     "gridsome": "^0.5.0",
+    "gridsome-plugin-pwa": "^0.0.8",
     "marked": "^0.6.1",
     "vuex": "^3.1.0"
   },

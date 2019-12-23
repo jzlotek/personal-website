@@ -18,8 +18,8 @@
         </section>
         <section class="content-text__section">
           <p class="text__p">
-            I am currently a teching assistant for CS265 (Advanced Programming
-            Techniques) at Drexel.
+            I am currently a teaching assistant for CS525 (The Theory of
+            Computation) at Drexel.
           </p>
         </section>
       </div>
@@ -29,14 +29,14 @@
 </template>
 
 <script>
-import CircleLinksContainer from "../components/CircleLinksContainer";
+import CircleLinksContainer from '../components/CircleLinksContainer'
 
 export default {
   metaInfo: {
-    title: 'Home'
+    title: 'Home',
   },
   components: {
-    CircleLinksContainer
-  }
-};
+    CircleLinksContainer,
+  },
+}
 </script>

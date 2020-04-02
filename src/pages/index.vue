@@ -18,8 +18,7 @@
         </section>
         <section class="content-text__section">
           <p class="text__p">
-            I am currently a teaching assistant for CS525 (The Theory of
-            Computation) at Drexel.
+            I am currently a teaching assistant for CS583 (Graduate Introduction to Computer Vision) at Drexel.
           </p>
         </section>
       </div>

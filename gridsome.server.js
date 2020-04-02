@@ -1,6 +1,5 @@
 const client = require('./src/plugins/contentful');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 // Server API makes it possible to hook into various parts of Gridsome
 // on server-side and add custom data to the GraphQL data layer.
 // Learn more: https://gridsome.org/docs/server-api

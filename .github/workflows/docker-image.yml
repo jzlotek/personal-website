@@ -23,7 +23,7 @@ jobs:
 
       - name: Build image
         if: success()
-        run: docker build -t ${GITHUB_REPOSITORY}:${IMAGE_TAG} .
+        run: docker build -t ${GITHUB_REPOSITORY}:${IMAGE_TAG} . -f ./docker/app.dockerfile
 
       - name: Push to docker registry
         if: success()

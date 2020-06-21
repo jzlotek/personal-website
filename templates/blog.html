@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    {% if posts %}
+    <div class="row">
+        <ul class="container">
+            {% for key, value in posts.items() %}
+            <div class="row h3">
+                <p class="col m-auto text-right">{{ value.date }}</p>
+                <a href="/blog/{{ key }}" class="col m-auto">{{ value.title }}</a>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <div class="row text-lowercase">
+        <p class="h1">Nothing here yet! Check back soon.</h1>
+    </div>
+    <div class="row">
+        <a class="h2" href="{{ url_for('index') }}"><p>home</p></a>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

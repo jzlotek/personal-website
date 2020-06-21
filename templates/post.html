@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h4 class="display-4">{{ post.title }}</h4>
+    </div>
+    <div class="row post">
+        <div class="col col-md-8 m-auto">
+            {{ post.html | safe }}
+        </div>
+    </div>
+
+    {% if last %}
+    <div class="row">
+        <a href="{{ last }}" class="m-auto h3">back</a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

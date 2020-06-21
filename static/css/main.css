@@ -1,0 +1,30 @@
+html {
+    --bg: #1b1b1b;
+    --muted: #c0bebe;
+    --accent: #ce1b1b;
+}
+body {
+    font-family: monospace;
+    font-size: 1rem;
+    color: #eeeeee;
+    background-color: var(--bg);
+}
+
+.navbar {
+    font-size: 1.5rem;
+}
+
+.text--accent {
+    color: var(--accent);
+}
+.text--muted {
+    color: var(--muted);
+}
+
+.post {
+    font-size: 1.1rem;;
+}
+
+.post * h1, .post * h2, .post * h3, .post * h4 {
+    color: var(--accent);
+}

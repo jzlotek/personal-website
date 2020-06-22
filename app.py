@@ -19,7 +19,7 @@ def load_posts(directory):
         dt = datetime.datetime.strptime(file_name[:8], FMT_STR)
         title = list(filter(lambda x: x != '', file_name[8:].split('.')[0].split('_')))
         slug = '-'.join(title)
-        path = f'{dt.year}/{dt.month}/{dt.day}/{slug}'
+        path = f'{dt.year}/{dt.month}/{dt.day}/{slug.lower()}'
         POSTS[path] = {
             "html": str(markdown2.markdown_path(file)),
             "title": ' '.join(title),

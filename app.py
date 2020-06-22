@@ -63,8 +63,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port', help="Port to use", default=5000)
     parser.add_argument('--posts', help='Directory to load posts from', default='posts')
+    parser.add_argument('--debug', help='Enables auto reload', default=False, action='store_true')
     args = parser.parse_args()
     load_posts(args.posts)
 
-    app.run(host='0.0.0.0', port=args.port)
+    app.run(host='0.0.0.0', port=args.port, debug=args.debug)
 

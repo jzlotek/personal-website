@@ -5,10 +5,16 @@
     {% if posts %}
     <div class="row">
         <ul class="container">
-            {% for key, value in posts.items() %}
-            <div class="row h3">
-                <p class="col m-auto text-right">{{ value.date }}</p>
-                <a href="/blog/{{ key }}" class="col m-auto">{{ value.title }}</a>
+            {% for key, value in posts.items() | reverse %}
+            <div class="row h3 py-2">
+                <div class="col col-md-8 m-auto">
+                    <div class="row">
+                        <p class="col m-auto text-right">{{ value.date }}</p>
+                    </div>
+                    <div class="row">
+                        <a href="/blog/{{ key }}" class="col m-auto text-right">{{ value.title }}</a>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </ul>

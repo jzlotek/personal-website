@@ -6,14 +6,12 @@
     <div class="row">
         <ul class="container">
             {% for key, value in posts.items() | reverse %}
-            <div class="row h3 py-2">
-                <div class="col col-md-8 m-auto">
-                    <div class="row">
-                        <p class="col m-auto text-right">{{ value.date }}</p>
-                    </div>
-                    <div class="row">
-                        <a href="/blog/{{ key }}" class="col m-auto text-right">{{ value.title }}</a>
-                    </div>
+            <div class="row h3">
+                <div class="col col-md-8 mx-auto py-0 nav-item">
+                    <a href="/blog/{{ key }}" class="col mx-auto text-right nav-link text-secondary">
+                        <p class="text-danger">{{ value.date }}</p>
+                        <p>{{ value.title }}</p>
+                    </a>
                 </div>
             </div>
             {% endfor %}

@@ -1,7 +1,9 @@
-html {
+:root {
     --bg: #1b1b1b;
     --muted: #c0bebe;
     --accent: #ce1b1b;
+    --red: var(--accent);
+    --danger: var(--accent);
 }
 body {
     font-family: monospace;
@@ -27,4 +29,8 @@ body {
 
 .post * h1, .post * h2, .post * h3, .post * h4 {
     color: var(--accent);
+}
+
+.text-danger {
+    color: var(--danger) !important;
 }

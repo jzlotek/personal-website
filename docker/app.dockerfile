@@ -9,7 +9,7 @@ WORKDIR /flask/app
 COPY requirements.txt ./
 
 RUN apk update\
-    && apk add --no-cache --virtual .build-deps gcc g++ python3-dev musl-dev libzmq\
+    && apk add --no-cache --virtual .build-deps gcc g++ python3-dev musl-dev zeromq-dev linux-headers\
     && pip install --no-cache-dir -r requirements.txt\
     && apk del .build-deps
 

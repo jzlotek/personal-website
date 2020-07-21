@@ -59,13 +59,19 @@ def page_not_found(e):
     return render_template("404.html"), 404
 
 
-if __name__ == "__main__":
+def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port', help="Port to use", default=5000)
     parser.add_argument('--posts', help='Directory to load posts from', default='posts')
     parser.add_argument('--debug', help='Enables auto reload', default=False, action='store_true')
-    args = parser.parse_args()
-    load_posts(args.posts)
+    return parser.parse_args()
 
+
+# bootstrap args and posts
+args = parse_args()
+load_posts(args.posts)
+
+
+if __name__ == "__main__":
     app.run(host='0.0.0.0', port=args.port, debug=args.debug)
 

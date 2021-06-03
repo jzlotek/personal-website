@@ -4,7 +4,7 @@ Flask==1.1.2
 isort==4.3.21
 itsdangerous==1.1.0
 jedi==0.17.2
-Jinja2==2.11.2
+Jinja2==2.11.3
 lazy-object-proxy==1.4.3
 loguru==0.5.1
 markdown2==2.4.0

@@ -1,0 +1,26 @@
+@import 'reset';
+@import 'nav';
+
+@font-face {
+    font-family: SpaceMono;
+    src: url("../fonts/SpaceMono-Regular.ttf");
+    font-display: swap;
+}
+
+:root {
+    --bg: #1b1b1b;
+    --muted: #c0bebe;
+    --accent: #ce1b1b;
+    --red: var(--accent);
+    --danger: var(--accent);
+    font-size: 24px;
+}
+
+body {
+    font-family: SpaceMono, system-ui, monospace;
+    font-size: 1rem;
+    color: #eeeeee;
+    background-color: var(--bg);
+}
+
+

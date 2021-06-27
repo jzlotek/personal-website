@@ -1,47 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container px-2">
-    <div class="row py-3">
-        <div class="d-md-none col text-right"><p class="h3 text--accent">about</p></div>
-        <div class="col-md-8 text-right"><p class="h4 text--muted text-lowercase">
+<div class="container">
+    <div class="">
+        <div class="py-3">
+            <p class="">
             My name is John Zlotek and I am a fifth year BS/MS student at Drexel University studying Computer Science.
             I have interests in artificial intelligence, systems, and computer vision as well as being an evangelist
             in my department for using Linux (i use arch btw) and GNU/Linux tools.
-        </p></div>
-        <div class="d-none d-md-block col-md-4 text-left"><p class="h3 text--accent">about</p></div>
-    </div>
-    <div class="row py-3">
-        <div class="d-md-none col text-right"><p class="h3 text--accent">teaching</p></div>
-        <div class="col-md-8 text-right"><p class="h4 text--muted text-lowercase">
-            I am currently a TA for CS 583 (Graduate Introduction to Computer Vision).
-        </p></div>
-        <div class="d-none d-md-block col-md-4 text-left"><p class="h3 text--accent">teaching</p></div>
-    </div>
-    <div class="row py-3">
-        <div class="d-md-none col text-right"><p class="h3 text--accent">technical</p></div>
-        <div class="col-md-8 text-right"><p class="h4 text--muted text-lowercase">
-            Languages: Go, Python, C, Java, Bash, LaTex, JavaScript
-            <br/><br/>
-            Libraries: Keras, Numpy/Scipy Stack
-            <br/><br/>
-            Frameworks: Gin, Flask, Quart, aiohttp, Vue.js
-            <br/><br/>
-            Tools: vim, Docker, Kubernetes, JetBrains Suite
-        </p></div>
-        <div class="d-none d-md-block col-md-4 text-left"><p class="h3 text--accent">technical</p></div>
-    </div>
-    <div class="row py-3">
-        <div class="d-md-none col text-right"><p class="h3 text--accent">site</p></div>
-        <div class="col-md-8 text-right"><p class="h4 text--muted text-lowercase">
-            I built this site to showcase some of my projects and thoughts that might come up from time to time.
-            <br/><br/>
-            My resume is currently <a href="https://github.com/jzlotek/resume/raw/master/resume.pdf" target="_blank" rel="noopener">on my GitHub</a> to view.
-            I try to keep it as updated as possible.
-            <br/><br/>
-            Other things I work on can be found on my <a href="https://github.com/jzlotek" target="_blank" rel="noopener">github</a>.
-        </p></div>
-        <div class="d-none d-md-block col-md-4 text-left"><p class="h3 text--accent">site</p></div>
+            </p>
+        </div>
+        <div class="col-md-8 text-right">
+            <p class="h4 text--muted text-lowercase">
+                Languages: Go, Python, C, Java, Bash, LaTex, JavaScript
+                <br/>
+                Libraries: Keras, Numpy/Scipy Stack
+                <br/>
+                Frameworks: Gin, Flask, Quart, aiohttp, Vue.js
+                <br/>
+                Tools: vim, Docker, Kubernetes
+            </p>
+        </div>
+        <div class="py-3">
+            <div class="col-md-8 text-right"><p class="h4 text--muted text-lowercase">
+                <a href="https://github.com/jzlotek/resume/raw/master/resume.pdf" target="_blank" rel="noopener">📄︁</a>
+                <a href="https://github.com/jzlotek" target="_blank" rel="noopener"><img src="{{ url_for('static', filename='img/gh.svg') }}" alt="GitHub Logo"></a>
+            </p></div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,22 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+<div class="center full justify">
     {% if posts %}
-    <div class="row">
-        <ul class="container">
-            {% for key, value in posts.items() | reverse %}
-            <div class="row h3">
-                <div class="col col-md-8 mx-auto py-0 nav-item">
-                    <a href="/blog/{{ key }}" class="col mx-auto text-right nav-link text-secondary">
-                        <p class="text-danger">{{ value.date }}</p>
-                        <p>{{ value.title }}</p>
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
-        </ul>
-    </div>
+    <ul class="flex flex-v full-container">
+        {% for key, value in posts.items() | reverse %}
+            <a href="/blog/{{ key }}" class="link-rounded link-item navbar-link">
+                <p class="text-danger">{{ value.date }}</p>|<p>{{ value.title }}</p>
+            </a>
+        {% endfor %}
+    </ul>
     {% else %}
     <div class="row text-lowercase">
         <p class="h1">Nothing here yet! Check back soon.</h1>

@@ -32,22 +32,22 @@ def get_static_resource(path):
     return send_file(os.path.join(app.root_path, 'static', path))
 
 
-@app.route('/')
+@app.get('/')
 def index():
     return render_template('index.html')
 
 
-@app.route('/projects')
+@app.get('/projects')
 def projects():
     return render_template('projects.html')
 
 
-@app.route('/blog')
+@app.get('/blog')
 def blog():
     return render_template('blog.html', posts=POSTS)
 
 
-@app.route('/blog/<path:path>')
+@app.get('/blog/<path:path>')
 def blog_post(path):
     if path not in POSTS:
         return abort(404)

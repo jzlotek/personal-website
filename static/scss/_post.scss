@@ -1,0 +1,35 @@
+@import "colors";
+
+.post {
+    &-inner {
+        & > h1,h2,h3,h4 {
+            padding-left: 0.5em;
+            color: map-get($colors, "gray");
+        }
+        & > h1::before {
+            content: "# ";
+            color: map-get($colors, "red");
+        }
+        & > h2::before {
+            content: "## ";
+            color: map-get($colors, "red");
+        }
+        & > h3::before {
+            content: "### ";
+            color: map-get($colors, "red");
+        }
+        & > h4::before {
+            content: "#### ";
+            color: map-get($colors, "red");
+        }
+        & > p {
+            padding: 1em 0.5em;
+        }
+    }
+
+    .post-inner > &-title {
+        font-size: 1.5em;
+        color: map-get($colors, "ming");
+        padding-bottom: 0.5em;
+    }
+}

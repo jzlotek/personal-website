@@ -41,6 +41,9 @@ def index():
 def projects():
     return render_template('projects.html')
 
+@app.get('/donate')
+def donate():
+    return render_template('donate.html')
 
 @app.get('/blog')
 def blog():

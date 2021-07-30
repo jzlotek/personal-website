@@ -1,32 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <div class="">
+<div class="center full justify">
+    <div class="full-container flex flex-v">
         <div class="py-3">
-            <p class="">
-            My name is John Zlotek and I am a fifth year BS/MS student at Drexel University studying Computer Science.
-            I have interests in artificial intelligence, systems, and computer vision as well as being an evangelist
-            in my department for using Linux (i use arch btw) and GNU/Linux tools.
-            </p>
-        </div>
-        <div class="col-md-8 text-right">
-            <p class="h4 text--muted text-lowercase">
-                Languages: Go, Python, C, Java, Bash, LaTex, JavaScript
-                <br/>
-                Libraries: Keras, Numpy/Scipy Stack
-                <br/>
-                Frameworks: Gin, Flask, Quart, aiohttp, Vue.js
-                <br/>
-                Tools: vim, Docker, Kubernetes
-            </p>
-        </div>
-        <div class="py-3">
-            <div class="col-md-8 text-right"><p class="h4 text--muted text-lowercase">
-                <a href="https://github.com/jzlotek/resume/raw/master/resume.pdf" target="_blank" rel="noopener">📄︁</a>
-                <a href="https://github.com/jzlotek" target="_blank" rel="noopener"><img src="{{ url_for('static', filename='img/gh.svg') }}" alt="GitHub Logo"></a>
-            </p></div>
+            <div class="main-content">
+                <p class="main-text">> John Zlotek</p>
+                <p class="main-text">> </p>
+                <p class="main-text">> i use artix btw.</p>
+                <p class="main-text">> Resume: <a href="https://github.com/jzlotek/resume/raw/master/resume.pdf" target="_blank" rel="noopener" class="resume-link">📄︁</a> </p>
+                <p class="main-text">> GitHub: <a href="https://github.com/jzlotek" target="_blank" rel="noopener" class="github-link"><img src="{{ url_for('static', filename='img/gh.svg') }}" alt="GitHub Logo"></a> </p>
+            </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

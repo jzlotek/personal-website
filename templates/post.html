@@ -1,23 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col col-md-8 m-auto">
-            <h4 class="display-4 text-right">{{ post.title }}</h4>
-        </div>
-    </div>
-    <div class="row post">
-        <div class="col col-md-8 m-auto">
+<div class="center full justify">
+    <div class="flex flex-v">
+
+
+        <div class="post-inner">
+            <h1 class="post-title">{{ post.title }}</h4>
             {{ post.html | safe }}
         </div>
-    </div>
 
-    {% if last %}
-    <div class="row">
-        <a href="{{ last }}" class="m-auto h3">back</a>
+        {% if last %}
+        <div class="py-3">
+            <a href="{{ last }}" class="link-rounded">back</a>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
 
 {% endblock %}

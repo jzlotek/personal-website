@@ -958,11 +958,32 @@ table {
   }
 }
 
+.color-red {
+  color: #931621;
+}
+
+.color-slate {
+  color: #28464b;
+}
+
+.color-ming {
+  color: #326771;
+}
+
+.color-gray {
+  color: #bcabae;
+}
+
+.color-white {
+  color: #fbfbfb;
+}
+
 .navbar {
-  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
 }
 .navbar-item {
-  margin: 0.75em;
+  padding: 0.75em;
 }
 .navbar-item:last-child {
   margin-left: auto;
@@ -973,8 +994,7 @@ table {
   transition: all 0.5s ease-in-out;
 }
 .navbar-link:hover, .navbar-link:focus {
-  color: white;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff;
+  text-shadow: 0 0 7px white, 0 0 10px white, 0 0 21px white;
 }
 
 .link-item {
@@ -986,15 +1006,92 @@ table {
 .link-item:last-child {
   margin-bottom: auto;
 }
-
 .link-rounded {
   padding: 2em;
   transition: all 0.5s ease-in-out;
+  text-decoration: none;
+  color: inherit;
 }
-.link-rounded:hover, .link-rounded:focus .link-rounded:focus-within {
-  color: white;
-  outline: 1px solid white;
-  -moz-outline-radius: 5px;
+.link-rounded:hover > .neon-hover, .link-rounded:focus .link-rounded:focus-within > .neon-hover {
+  text-shadow: 0 0 7px currentcolor, 0 0 10px currentcolor, 0 0 21px currentcolor;
+}
+
+.resume-link {
+  text-decoration: none;
+  font-size: 0.75em;
+}
+
+.github-link > img {
+  height: 0.75em;
+}
+
+.color-red {
+  color: #931621;
+}
+
+.color-slate {
+  color: #28464b;
+}
+
+.color-ming {
+  color: #326771;
+}
+
+.color-gray {
+  color: #bcabae;
+}
+
+.color-white {
+  color: #fbfbfb;
+}
+
+.color-red {
+  color: #931621;
+}
+
+.color-slate {
+  color: #28464b;
+}
+
+.color-ming {
+  color: #326771;
+}
+
+.color-gray {
+  color: #bcabae;
+}
+
+.color-white {
+  color: #fbfbfb;
+}
+
+.post-inner > h1, .post-inner h2, .post-inner h3, .post-inner h4 {
+  padding-left: 0.5em;
+  color: #bcabae;
+}
+.post-inner > h1::before {
+  content: "# ";
+  color: #931621;
+}
+.post-inner > h2::before {
+  content: "## ";
+  color: #931621;
+}
+.post-inner > h3::before {
+  content: "### ";
+  color: #931621;
+}
+.post-inner > h4::before {
+  content: "#### ";
+  color: #931621;
+}
+.post-inner > p {
+  padding: 1em 0.5em;
+}
+.post-inner > .post-title {
+  font-size: 1.5em;
+  color: #326771;
+  padding-bottom: 0.5em;
 }
 
 @font-face {
@@ -1008,14 +1105,34 @@ table {
   --accent: #ce1b1b;
   --red: var(--accent);
   --danger: var(--accent);
-  font-size: 24px;
+  font-size: 20px;
+}
+@media (min-width: 992px) {
+  :root {
+    font-size: 24px;
+  }
 }
 
 body {
   font-family: SpaceMono, system-ui, monospace;
-  font-size: 1rem;
+  font-size: 1em;
   color: #eeeeee;
   background-color: var(--bg);
+}
+
+@media (max-width: 1200px) {
+  .main-content {
+    padding: inherit 1em inherit 1em;
+  }
+}
+.main-text::first-letter {
+  color: #931621;
+}
+
+footer {
+  font-size: 0.75em;
+  display: flex;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=main.css.map */

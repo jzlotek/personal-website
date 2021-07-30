@@ -2,11 +2,12 @@
 
 {% block content %}
 <div class="container">
-    <div class="row text-lowercase">
-        <p class="h1">Nothing here yet! Check back soon.</h1>
-    </div>
-    <div class="row">
-        <a class="h2" href="{{ url_for('index') }}"><p>home</p></a>
+    <div class="justify full center">
+        <div class="flex flex-v full-container">
+            <div class="github-card" data-github="jzlotek/rtc" data-width="400" data-height="" data-theme="medium"></div>
+            <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+            <a class="link-rounded" href="{{ url_for('index') }}"><p>home</p></a>
+        </div>
     </div>
 </div>
 {% endblock %}

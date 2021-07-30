@@ -1,0 +1,58 @@
+@import 'util.scss';
+@import 'colors';
+
+.navbar {
+    flex-direction: row;
+    width: 100%;
+
+    &-item {
+        padding: 0.75em;
+        &:last-child {
+            margin-left: auto;
+        }
+    }
+
+    &-link {
+        text-decoration: none;
+        color: var(--muted);
+        transition: all 0.5s ease-in-out;
+
+        &:hover, &:focus {
+            @include neon("white");
+        }
+    }
+}
+
+.link {
+    
+    &-item {
+        margin: 0.75em;
+        &:first-child {
+            margin-top: auto;
+        }
+        &:last-child {
+            margin-bottom: auto;
+        }
+    }
+    &-rounded {
+        padding: 2em;
+        transition: all 0.5s ease-in-out;
+        text-decoration: none;
+        color: inherit;
+        @include hover() {
+            & > .neon-hover {
+                @include neon-inherit();
+            }
+        }
+    }
+}
+
+.resume-link {
+    text-decoration: none;
+    font-size: 0.75em;
+}
+.github-link {
+    & > img {
+        height: 0.75em;
+    }
+}

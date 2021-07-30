@@ -1,0 +1,44 @@
+$bps: (
+  'small':  767px,
+  'medium': 992px,
+  'large':  1200px
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Hugo Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $bps
+@mixin smaller($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($bps, $breakpoint) {
+    // Prints a media query based on the value
+    @media (max-width: map-get($bps, $breakpoint)) {
+      @content;
+    }
+  }
+ 
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($bps)}.";
+  }
+}
+/// Mixin to manage responsive breakpoints
+/// @author Hugo Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $bps
+@mixin larger($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($bps, $breakpoint) {
+    // Prints a media query based on the value
+    @media (min-width: map-get($bps, $breakpoint)) {
+      @content;
+    }
+  }
+ 
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($bps)}.";
+  }
+}

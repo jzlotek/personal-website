@@ -1,0 +1,36 @@
+
+$colors: (
+  "red": #931621,
+  "slate": #28464b,
+  "ming": #326771,
+  "gray": #bcabae,
+  "white": #fbfbfb,
+);
+
+@mixin neon($name) {
+    $c: lighten(map-get($colors, $name), 5%);
+    text-shadow: 
+        0 0 7px $c,
+        0 0 10px $c,
+        0 0 21px $c;
+}
+
+@mixin neon-inherit {
+    $c: currentcolor;
+    text-shadow: 
+        0 0 7px $c,
+        0 0 10px $c,
+        0 0 21px $c;
+}
+
+@each $name, $color in $colors {
+    .color-#{$name} {
+        color: #{$color};
+    } 
+}
+
+@mixin hover() {
+    &:hover, &:focus &:focus-within {
+        @content;
+    }
+}

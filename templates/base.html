@@ -6,8 +6,9 @@
     <title>John Zlotek's Site</title>
     <meta name="description" content="John Zlotek's Personal Website">
 
-    <link href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/util.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='fonts/SpaceMono-Regular.css') }}" rel="preload">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170470695-1"></script>
     <script>
@@ -21,7 +22,7 @@
 {% include "nav.html" %}
 <body>
     <main>
-        <div class="container content pt-5 px-5">
+        <div class="container">
             {% block content %}{% endblock %}
         </div>
     </main>

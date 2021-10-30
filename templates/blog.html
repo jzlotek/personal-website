@@ -4,7 +4,7 @@
 <div class="center full justify">
     {% if posts %}
     <ul class="flex flex-v full-container">
-        {% for key, value in posts.items() | reverse %}
+        {% for key, value in posts.items() %}
             <a href="/blog/{{ key }}" class="link-rounded">
                 <span class="color-ming neon-hover">{{ value.date }}</span><br/><span class="color-white neon-hover">{{ value.title }}</span>
             </a>

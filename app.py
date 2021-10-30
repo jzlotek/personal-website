@@ -1,72 +1,92 @@
 import argparse
 import datetime
 import glob
-import os
 import markdown2
+import random
 
-from flask import Flask, request, send_file, render_template, redirect, abort
+import uvicorn
+from starlette.exceptions import HTTPException as StarletteHTTPException
+from fastapi import FastAPI
+from fastapi import Request
+from fastapi.responses import RedirectResponse
+from fastapi.exceptions import HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
-app = Flask(__name__, static_folder='static', static_url_path='', template_folder='templates')
-
+app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 POSTS = {}
 
 
 def load_posts(directory):
-    FMT_STR = '%Y%m%d'
-    for file in glob.glob(f'{directory}/*.md'):
-        file_name = file.split('/')[-1]
+    FMT_STR = "%Y%m%d"
+    for file in glob.glob(f"{directory}/*.md"):
+        file_name = file.split("/")[-1]
         dt = datetime.datetime.strptime(file_name[:8], FMT_STR)
-        title = list(filter(lambda x: x != '', file_name[8:].split('.')[0].split('_')))
-        slug = '-'.join(title)
-        path = f'{dt.year}/{dt.month}/{dt.day}/{slug.lower()}'
+        title = list(filter(lambda x: x != "", file_name[8:].split(".")[0].split("_")))
+        slug = "-".join(title)
+        path = f"{dt.year}/{dt.month}/{dt.day}/{slug.lower()}"
         POSTS[path] = {
-            "html": str(markdown2.markdown_path(file)),
-            "title": ' '.join(title),
-            "date": '.'.join(path.split('/')[:-1])
+            "html": str(
+                markdown2.markdown_path(
+                    file, extras=["fenced-code-blocks", "metadata", "code-friendly"]
+                )
+            ),
+            "title": " ".join(title),
+            "date": ".".join(path.split("/")[:-1]),
         }
 
 
-@app.route('/static/<path:path>')
-def get_static_resource(path):
-    return send_file(os.path.join(app.root_path, 'static', path))
+@app.get("/")
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.get('/')
-def index():
-    return render_template('index.html')
+@app.get("/projects")
+async def projects(request: Request):
+    return templates.TemplateResponse("projects.html", {"request": request})
 
 
-@app.get('/projects')
-def projects():
-    return render_template('projects.html')
-
-@app.get('/donate')
-def donate():
-    return render_template('donate.html')
-
-@app.get('/blog')
-def blog():
-    return render_template('blog.html', posts=POSTS)
+@app.get("/donate")
+async def donate(request: Request):
+    return templates.TemplateResponse("donate.html", {"request": request})
 
 
-@app.get('/blog/<path:path>')
-def blog_post(path):
+@app.get("/blog")
+async def blog(request: Request):
+    return templates.TemplateResponse("blog.html", {"posts": POSTS, "request": request})
+
+
+@app.get("/blog/{year}/{month}/{day}/{title}")
+async def blog_post(year: int, month: int, day: int, title: str, request: Request):
+    path = f"{year}/{month}/{day}/{title}"
     if path not in POSTS:
-        return abort(404)
-    return render_template('post.html', last=request.referrer, post=POSTS.get(path))
+        raise HTTPException(status_code=404)
+    return templates.TemplateResponse(
+        "post.html", {"post": POSTS.get(path), "request": request}
+    )
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template("404.html"), 404
+@app.exception_handler(StarletteHTTPException)
+@app.exception_handler(HTTPException)
+async def exception_handler(request: Request, exc):
+    if random.randint(0, 50) != 0:
+        return templates.TemplateResponse(
+            "404.html", {"request": request}, status_code=404
+        )
+    else:  # unlucky
+        return RedirectResponse(url="https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--port', help="Port to use", default=5000)
-    parser.add_argument('--posts', help='Directory to load posts from', default='posts')
-    parser.add_argument('--debug', help='Enables auto reload', default=False, action='store_true')
+    parser.add_argument("-p", "--port", help="Port to use", default=5000)
+    parser.add_argument("--posts", help="Directory to load posts from", default="posts")
+    parser.add_argument(
+        "--debug", help="Enables auto reload", default=False, action="store_true"
+    )
     return parser.parse_args()
 
 
@@ -76,5 +96,4 @@ load_posts(args.posts)
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=args.port, debug=args.debug)
-
+    uvicorn.run(app, host="0.0.0.0", port=args.port, debug=args.debug)

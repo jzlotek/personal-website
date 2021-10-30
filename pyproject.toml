@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "personal-website"
+version = "0.1.0"
+description = ""
+authors = ["John Zlotek <jzlotek@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+markdown2 = "^2.4.1"
+fastapi = "^0.70.0"
+uvicorn = "^0.15.0"
+loguru = "^0.5.3"
+Pygments = "^2.10.0"
+Jinja2 = "^3.0.2"
+
+[tool.poetry.dev-dependencies]
+jedi = "^0.18.0"
+black = "^21.9b0"
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

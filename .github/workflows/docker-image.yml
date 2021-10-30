@@ -2,7 +2,7 @@ name: Deploy to docker hub
 
 on:
    push:
-     branches:    
+     branches:
       - master
      tags:
        - 'v*'
@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@master
 
@@ -23,7 +23,7 @@ jobs:
 
       - name: Build image
         if: success()
-        run: docker build -t ${GITHUB_REPOSITORY}:${IMAGE_TAG} . -f ./docker/app.dockerfile
+        run: docker build -t ${GITHUB_REPOSITORY}:${IMAGE_TAG} .
 
       - name: Push to docker registry
         if: success()

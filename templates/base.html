@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>John Zlotek's Site</title>
     <meta name="description" content="John Zlotek's Personal Website">
-
-    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/util.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='fonts/SpaceMono-Regular.css') }}" rel="preload">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    {% block head %}{% endblock %}
+    <link href="{{ url_for('static', path='css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='css/util.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='fonts/SpaceMono-Regular.css') }}" rel="preload">
+    <link rel="shortcut icon" href="{{ url_for('static', path='img/favicon.ico') }}">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170470695-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -17,7 +17,6 @@
         gtag('js', new Date());
         gtag('config', 'UA-170470695-1');
     </script>
-
 </head>
 {% include "nav.html" %}
 <body>

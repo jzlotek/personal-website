@@ -1,19 +1,15 @@
-FROM python:3.9
+FROM python:3.9-slim as requirements-stage
 
-LABEL version="1.0"
-LABEL description="Personal website frontend Dockerfile"
-LABEL maintainer="jzlotek@gmail.com"
+WORKDIR /tmp
+RUN pip install poetry
+COPY ./pyproject.toml ./poetry.lock* /tmp/
+RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
-RUN pip install --no-cache-dir poetry
+FROM python:3.9-slim
 
 WORKDIR /code
-COPY poetry.lock pyproject.toml /code/
-
-RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
-
-COPY . /code/
-
-EXPOSE 5000
+COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+COPY . /code
 
 CMD ["python3", "app.py"]
-

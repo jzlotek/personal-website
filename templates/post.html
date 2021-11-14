@@ -7,18 +7,14 @@
 {% block content %}
 <div class="center full justify">
     <div class="flex flex-v">
-
-
         <div class="post-inner">
             <h1 class="post-title">{{ post.title }}</h4>
             {{ post.html | safe }}
         </div>
 
-        {% if last %}
         <div class="py-3">
-            <a href="{{ last }}" class="link-rounded">back</a>
+            <a href="{{ url_for('blog') }}" class="link-rounded">back</a>
         </div>
-        {% endif %}
     </div>
 </div>
 

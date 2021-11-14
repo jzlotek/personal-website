@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -958,24 +959,24 @@ table {
   }
 }
 
-.color-red {
-  color: #931621;
+.color-bg {
+  color: #0A0B0D;
 }
 
-.color-slate {
-  color: #28464b;
-}
-
-.color-ming {
-  color: #326771;
-}
-
-.color-gray {
-  color: #bcabae;
+.color-charcoal {
+  color: #4D4F49;
 }
 
 .color-white {
-  color: #fbfbfb;
+  color: #F0F3F2;
+}
+
+.color-purple {
+  color: #6F1CB0;
+}
+
+.color-eminence {
+  color: #5D2077;
 }
 
 .navbar {
@@ -994,7 +995,7 @@ table {
   transition: all 0.5s ease-in-out;
 }
 .navbar-link:hover, .navbar-link:focus {
-  text-shadow: 0 0 7px white, 0 0 10px white, 0 0 21px white;
+  text-shadow: 0 0 7px #fefefe, 0 0 10px #fefefe, 0 0 21px #fefefe;
 }
 
 .link-item {
@@ -1025,72 +1026,75 @@ table {
   height: 0.75em;
 }
 
-.color-red {
-  color: #931621;
+.color-bg {
+  color: #0A0B0D;
 }
 
-.color-slate {
-  color: #28464b;
-}
-
-.color-ming {
-  color: #326771;
-}
-
-.color-gray {
-  color: #bcabae;
+.color-charcoal {
+  color: #4D4F49;
 }
 
 .color-white {
-  color: #fbfbfb;
+  color: #F0F3F2;
 }
 
-.color-red {
-  color: #931621;
+.color-purple {
+  color: #6F1CB0;
 }
 
-.color-slate {
-  color: #28464b;
+.color-eminence {
+  color: #5D2077;
 }
 
-.color-ming {
-  color: #326771;
+.color-bg {
+  color: #0A0B0D;
 }
 
-.color-gray {
-  color: #bcabae;
+.color-charcoal {
+  color: #4D4F49;
 }
 
 .color-white {
-  color: #fbfbfb;
+  color: #F0F3F2;
 }
 
+.color-purple {
+  color: #6F1CB0;
+}
+
+.color-eminence {
+  color: #5D2077;
+}
+
+.post-inner {
+  padding-top: 1em;
+}
 .post-inner > h1, .post-inner h2, .post-inner h3, .post-inner h4 {
   padding-left: 0.5em;
-  color: #bcabae;
+  color: #F0F3F2;
 }
 .post-inner > h1::before {
   content: "# ";
-  color: #931621;
+  color: #6F1CB0;
 }
 .post-inner > h2::before {
   content: "## ";
-  color: #931621;
+  color: #6F1CB0;
 }
 .post-inner > h3::before {
   content: "### ";
-  color: #931621;
+  color: #6F1CB0;
 }
 .post-inner > h4::before {
   content: "#### ";
-  color: #931621;
+  color: #6F1CB0;
 }
 .post-inner > p {
   padding: 1em 0.5em;
 }
 .post-inner > .post-title {
-  font-size: 1.5em;
-  color: #326771;
+  font-size: 1em;
+  color: #F0F3F2;
   padding-bottom: 0.5em;
 }
 
@@ -1100,12 +1104,14 @@ table {
   font-display: swap;
 }
 :root {
-  --bg: #1b1b1b;
-  --muted: #c0bebe;
-  --accent: #ce1b1b;
+  --bg: map-get($colors, "bg");
+  --muted: map-get($colors, "charcoal");
+  --accent: map-get($colors, "purple");
   --red: var(--accent);
   --danger: var(--accent);
   font-size: 20px;
+  background: #0A0B0D;
+  background-color: #0A0B0D;
 }
 @media (min-width: 992px) {
   :root {
@@ -1114,10 +1120,9 @@ table {
 }
 
 body {
-  font-family: SpaceMono, system-ui, monospace;
+  font-family: "Montserrat", system-ui, monospace;
   font-size: 1em;
-  color: #eeeeee;
-  background-color: var(--bg);
+  color: #F0F3F2;
 }
 
 @media (max-width: 1200px) {
@@ -1126,7 +1131,7 @@ body {
   }
 }
 .main-text::first-letter {
-  color: #931621;
+  color: #6F1CB0;
 }
 
 footer {

@@ -2,25 +2,26 @@
 
 .post {
     &-inner {
+        padding-top: 1em;
         & > h1,h2,h3,h4 {
             padding-left: 0.5em;
-            color: map-get($colors, "gray");
+            color: map-get($colors, "white");
         }
         & > h1::before {
             content: "# ";
-            color: map-get($colors, "red");
+            color: map-get($colors, "purple");
         }
         & > h2::before {
             content: "## ";
-            color: map-get($colors, "red");
+            color: map-get($colors, "purple");
         }
         & > h3::before {
             content: "### ";
-            color: map-get($colors, "red");
+            color: map-get($colors, "purple");
         }
         & > h4::before {
             content: "#### ";
-            color: map-get($colors, "red");
+            color: map-get($colors, "purple");
         }
         & > p {
             padding: 1em 0.5em;
@@ -28,8 +29,8 @@
     }
 
     .post-inner > &-title {
-        font-size: 1.5em;
-        color: map-get($colors, "ming");
+        font-size: 1em;
+        color: map-get($colors, "white");
         padding-bottom: 0.5em;
     }
 }

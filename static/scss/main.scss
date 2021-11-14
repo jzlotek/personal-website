@@ -4,6 +4,8 @@
 @import 'bp';
 @import 'post';
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 @font-face {
     font-family: SpaceMono;
     src: url("../fonts/SpaceMono-Regular.ttf");
@@ -11,23 +13,24 @@
 }
 
 :root {
-    --bg: #1b1b1b;
-    --muted: #c0bebe;
-    --accent: #ce1b1b;
+    --bg: map-get($colors, "bg");
+    --muted: map-get($colors, "charcoal");
+    --accent: map-get($colors, "purple");
     --red: var(--accent);
     --danger: var(--accent);
-        font-size: 20px; 
+    font-size: 20px;
 
     @include larger('medium') {
         font-size: 24px;
     }
+    background: map-get($colors, "bg");
+    background-color: map-get($colors, "bg");
 }
 
 body {
-    font-family: SpaceMono, system-ui, monospace;
+    font-family: 'Montserrat', system-ui, monospace;
     font-size: 1em;
-    color: #eeeeee;
-    background-color: var(--bg);
+    color: map-get($colors, "white");
 }
 
 .main {
@@ -39,7 +42,7 @@ body {
 
     &-text {
         &::first-letter {
-            color: map-get($colors, "red");
+            color: map-get($colors, "purple");
         }
     }
 }

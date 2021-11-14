@@ -1,4 +1,4 @@
-@import 'util.scss';
+@import 'util';
 @import 'colors';
 
 .navbar {
@@ -24,7 +24,7 @@
 }
 
 .link {
-    
+
     &-item {
         margin: 0.75em;
         &:first-child {

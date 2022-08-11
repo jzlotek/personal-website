@@ -4,10 +4,14 @@
 <div class="center full justify">
     {% if posts %}
     <ul class="flex flex-v full-container">
-        {% for key, value in posts.items() %}
+        {% for key, value in posts.items() | sort(attribute='1.date', reverse=True) %}
             <a href="/blog/{{ key }}" class="link-rounded">
-                <span class="color-purple neon-hover">{{ value.date }}:</span><span class="px-2"></span><span class="color-white neon-hover">{{ value.title }}</span>
+                <span class="color-purple neon-hover">{{ value.date }}:</span>
+                <span class="px-2"></span><span class="color-white neon-hover">{{ value.title }}</span>
+                {%- set time = (value.words / 238) | round(method='ceil') | int  -%}
+                <span class="px-2"> | {{ '<' if (value.words / 238) < 1 else '' }}{{ time }} minute{{ 's' if time > 1 else '' }}</span>
             </a>
+
         {% endfor %}
     </ul>
     {% else %}

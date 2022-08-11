@@ -1,42 +1,56 @@
+from __future__ import annotations
+
 import argparse
 import datetime
 import glob
 import random
+from dataclasses import dataclass
+from typing import Dict
 
-from fastapi import FastAPI
-from fastapi import Request
+import markdown2
+import uvicorn
+from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-import markdown2
 from starlette.exceptions import HTTPException as StarletteHTTPException
-import uvicorn
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-POSTS = {}
+POSTS: Dict[str, Post] = {}
+FMT_STR = "%Y%m%d"
+
+
+@dataclass
+class Post:
+    html: str
+    title: str
+    date: str
+    words: int
 
 
 def load_posts(directory):
-    FMT_STR = "%Y%m%d"
     for file in glob.glob(f"{directory}/*.md"):
         file_name = file.split("/")[-1]
         dt = datetime.datetime.strptime(file_name[:8], FMT_STR)
         title = list(filter(lambda x: x != "", file_name[8:].split(".")[0].split("_")))
         slug = "-".join(title)
         path = f"{dt.year}/{dt.month}/{dt.day}/{slug.lower()}"
-        POSTS[path] = {
-            "html": str(
-                markdown2.markdown_path(
-                    file, extras=["fenced-code-blocks", "metadata", "code-friendly"]
-                )
-            ),
-            "title": " ".join(title),
-            "date": ".".join(path.split("/")[:-1]),
-        }
+        html = str(
+            markdown2.markdown_path(
+                file, extras=["fenced-code-blocks", "metadata", "code-friendly"]
+            )
+        )
+
+        POSTS[path] = Post(
+            html=html,
+            title= " ".join(title),
+            date=".".join(path.split("/")[:-1]),
+            words=len(html.split()),
+        )
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -58,6 +72,10 @@ async def donate(request: Request):
 async def blog(request: Request):
     return templates.TemplateResponse("blog.html", {"posts": POSTS, "request": request})
 
+
+@app.get("/feeds", response_class=HTMLResponse)
+async def rss(request: Request):
+    return templates.TemplateResponse("blog.html", {"posts": POSTS, "request": request})
 
 @app.get("/blog/{year}/{month}/{day}/{title}", response_class=HTMLResponse)
 async def blog_post(year: int, month: int, day: int, title: str, request: Request):

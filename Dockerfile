@@ -1,4 +1,4 @@
-FROM python:3.9-slim as requirements-stage
+FROM python:3.11-slim as requirements-stage
 
 WORKDIR /tmp
 
@@ -11,7 +11,7 @@ RUN python3 -m virtualenv /tmp/venv
 
 RUN /tmp/venv/bin/pip install -r requirements.txt
 
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 WORKDIR /code
 COPY --from=requirements-stage /tmp/venv /venv

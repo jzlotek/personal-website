@@ -18,7 +18,6 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 
 app = FastAPI()
-app.config["PREFERRED_URL_SCHEME"] = "https"
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
@@ -50,7 +49,7 @@ def load_posts(directory):
 
         POSTS[path] = Post(
             html=html,
-            title= " ".join(title),
+            title=" ".join(title),
             date=".".join(path.split("/")[:-1]),
             words=len(html.split()),
         )
@@ -79,6 +78,7 @@ async def blog(request: Request):
 @app.get("/feeds", response_class=HTMLResponse)
 async def rss(request: Request):
     return templates.TemplateResponse("blog.html", {"posts": POSTS, "request": request})
+
 
 @app.get("/blog/{year}/{month}/{day}/{title}", response_class=HTMLResponse)
 async def blog_post(year: int, month: int, day: int, title: str, request: Request):
@@ -115,8 +115,10 @@ def parse_args():
 args = parse_args()
 load_posts(args.posts)
 
+
 def main():
-    uvicorn.run(app, host="0.0.0.0", port=args.port, debug=args.debug)
+    uvicorn.run(app, host="0.0.0.0", port=args.port)
+
 
 if __name__ == "__main__":
     main()

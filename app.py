@@ -117,7 +117,9 @@ load_posts(args.posts)
 
 
 def main():
-    uvicorn.run(app, host="0.0.0.0", port=args.port)
+    uvicorn.run(
+        app, host="0.0.0.0", port=args.port, forwarded_allow_ips="*", proxy_headers=True
+    )
 
 
 if __name__ == "__main__":

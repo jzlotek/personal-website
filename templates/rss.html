@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>zlotek.dev blog</title>
+        <link>{{ url_for('blog') }}</link>
+        <ttl>60</ttl>
+        <atom:link href="{{ url_for('rss') }}" rel="self" type="application/rss+xml" />
+        <description>life ramblings</description>
+        <lastBuildDate>{{ build_date }}</lastBuildDate>
+
+        {% for key, post in posts.items() | sort(attribute='1.date', reverse=True) -%}
+        <item>
+            <title>{{ post.title }}</title>
+            <description><![CDATA[{{ post.rss | safe }}]]></description>
+            <link>{{ url_for('blog') }}/{{ post.path }}</link>
+            <guid>{{ url_for('blog') }}/{{ post.path }}</guid>
+            <pubDate>{{ post.pub_date }}</pubDate>
+        </item>
+        {%- endfor %}
+    </channel>
+</rss>

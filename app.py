@@ -6,6 +6,7 @@ import glob
 import random
 from dataclasses import dataclass
 from typing import Dict
+from pathlib import PosixPath
 
 import markdown2
 import uvicorn
@@ -15,7 +16,15 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.middleware.cors import CORSMiddleware
 
+BUILD_DATE: str = (
+    datetime.datetime.now().astimezone().strftime("%a, %d %b %Y %H:%M:%S %Z")
+)
+
+
+if PosixPath("/tmp/build_date").exists():
+    BUILD_DATE = PosixPath("/tmp/build_date").read_text().strip()
 
 app = FastAPI()
 
@@ -29,15 +38,18 @@ FMT_STR = "%Y%m%d"
 @dataclass
 class Post:
     html: str
+    rss: str
+    path: str
     title: str
     date: str
     words: int
+    pub_date: str
 
 
 def load_posts(directory):
     for file in glob.glob(f"{directory}/*.md"):
         file_name = file.split("/")[-1]
-        dt = datetime.datetime.strptime(file_name[:8], FMT_STR)
+        dt = datetime.datetime.strptime(file_name[:8], FMT_STR).astimezone()
         title = list(filter(lambda x: x != "", file_name[8:].split(".")[0].split("_")))
         slug = "-".join(title)
         path = f"{dt.year}/{dt.month}/{dt.day}/{slug.lower()}"
@@ -46,13 +58,26 @@ def load_posts(directory):
                 file, extras=["fenced-code-blocks", "metadata", "code-friendly"]
             )
         )
-
+        rss = str(markdown2.markdown_path(file))
+        split_date = path.split("/")[:-1]
         POSTS[path] = Post(
             html=html,
+            rss=rss,
+            path=path,
             title=" ".join(title),
-            date=".".join(path.split("/")[:-1]),
+            date=".".join(split_date),
             words=len(html.split()),
+            pub_date=dt.strftime("%a, %d %b %Y %H:%M:%S %Z"),
         )
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -75,9 +100,18 @@ async def blog(request: Request):
     return templates.TemplateResponse("blog.html", {"posts": POSTS, "request": request})
 
 
-@app.get("/feeds", response_class=HTMLResponse)
+@app.get("/rss")
 async def rss(request: Request):
-    return templates.TemplateResponse("blog.html", {"posts": POSTS, "request": request})
+    return templates.TemplateResponse(
+        "rss.html",
+        {"posts": POSTS, "build_date": BUILD_DATE, "request": request},
+        media_type="application/xml",
+        headers={
+            "Accept-Range": "bytes",
+            "Connection": "Keep-Alive",
+            "Keep-Alive": "timeout=5, max=100",
+        },
+    )
 
 
 @app.get("/blog/{year}/{month}/{day}/{title}", response_class=HTMLResponse)

@@ -18,4 +18,6 @@ COPY --from=requirements-stage /tmp/venv /venv
 
 COPY . /code
 
+RUN mkdir -p /tmp/ && date '+%a, %d %b %Y %H:%M:%S %Z' > /tmp/build_date
+
 CMD ["/venv/bin/python3", "app.py"]

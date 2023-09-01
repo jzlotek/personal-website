@@ -44,6 +44,7 @@ class Post:
     date: str
     words: int
     pub_date: str
+    tags: set[str]
 
 
 def load_posts(directory):
@@ -53,12 +54,11 @@ def load_posts(directory):
         title = list(filter(lambda x: x != "", file_name[8:].split(".")[0].split("_")))
         slug = "-".join(title)
         path = f"{dt.year}/{dt.month}/{dt.day}/{slug.lower()}"
-        html = str(
-            markdown2.markdown_path(
-                file, extras=["fenced-code-blocks", "metadata", "code-friendly"]
-            )
+        mkdown: markdown2.Markdown = markdown2.markdown_path(
+            file, extras=["fenced-code-blocks", "metadata", "code-friendly"]
         )
-        rss = str(markdown2.markdown_path(file))
+        html = str(mkdown)
+        rss = str(markdown2.markdown_path(file, extras=["metadata"]))
         split_date = path.split("/")[:-1]
         POSTS[path] = Post(
             html=html,
@@ -68,6 +68,7 @@ def load_posts(directory):
             date=".".join(split_date),
             words=len(html.split()),
             pub_date=dt.strftime("%a, %d %b %Y %H:%M:%S %Z"),
+            tags=set(mkdown.metadata.get("tags", [])),
         )
 
 

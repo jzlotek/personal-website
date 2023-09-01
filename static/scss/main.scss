@@ -27,8 +27,12 @@
     background-color: map-get($colors, "bg");
 }
 
+em {
+    font-style: italic;
+}
+
 body {
-    font-family: 'Montserrat', system-ui, monospace;
+    font-family: 'SpaceMono', 'Montserrat', system-ui, monospace;
     font-size: 1em;
     color: map-get($colors, "white");
 }

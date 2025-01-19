@@ -16,7 +16,7 @@ Pygments = ">=2.10.0"
 Jinja2 = ">=3.0.2"
 markdown2 = "^2.4.8"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 jedi = ">=0.18.0"
 black = ">=21.9b0"
 pytest = ">=6.2.5"

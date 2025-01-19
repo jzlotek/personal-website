@@ -26,7 +26,6 @@
 .link {
 
     &-item {
-        margin: 0.75em;
         &:first-child {
             margin-top: auto;
         }
@@ -35,7 +34,6 @@
         }
     }
     &-rounded {
-        padding: 2em;
         transition: all 0.5s ease-in-out;
         text-decoration: none;
         color: inherit;

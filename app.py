@@ -35,7 +35,7 @@ POSTS: Dict[str, Post] = {}
 FMT_STR = "%Y%m%d"
 
 
-@dataclass
+@dataclass(frozen=True)
 class Post:
     html: str
     rss: str
@@ -53,7 +53,7 @@ def load_posts(directory):
         dt = datetime.datetime.strptime(file_name[:8], FMT_STR).astimezone()
         title = list(filter(lambda x: x != "", file_name[8:].split(".")[0].split("_")))
         slug = "-".join(title)
-        path = f"{dt.year}/{dt.month}/{dt.day}/{slug.lower()}"
+        path = f"{dt.year}{dt.month}{dt.day}/{slug.lower()}"
         mkdown: markdown2.Markdown = markdown2.markdown_path(
             file, extras=["fenced-code-blocks", "metadata", "code-friendly"]
         )
@@ -83,7 +83,7 @@ app.add_middleware(
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request, "posts": POSTS})
 
 
 @app.get("/projects", response_class=HTMLResponse)
@@ -115,9 +115,9 @@ async def rss(request: Request):
     )
 
 
-@app.get("/blog/{year}/{month}/{day}/{title}", response_class=HTMLResponse)
-async def blog_post(year: int, month: int, day: int, title: str, request: Request):
-    path = f"{year}/{month}/{day}/{title}"
+@app.get("/blog/{date}/{title}", response_class=HTMLResponse)
+async def blog_post(date: int, title: str, request: Request):
+    path = f"{date}/{title}"
     if path not in POSTS:
         raise HTTPException(status_code=404)
     return templates.TemplateResponse(

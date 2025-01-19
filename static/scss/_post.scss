@@ -9,19 +9,19 @@
         }
         & > h1::before {
             content: "# ";
-            color: map-get($colors, "purple");
+            color: map-get($colors, "accent");
         }
         & > h2::before {
             content: "## ";
-            color: map-get($colors, "purple");
+            color: map-get($colors, "accent");
         }
         & > h3::before {
             content: "### ";
-            color: map-get($colors, "purple");
+            color: map-get($colors, "accent");
         }
         & > h4::before {
             content: "#### ";
-            color: map-get($colors, "purple");
+            color: map-get($colors, "accent");
         }
         & > p {
             padding: 1em 0.5em;

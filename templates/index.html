@@ -7,12 +7,13 @@
             <div class="main-content">
                 <p class="main-text">> John Zlotek</p>
                 <p class="main-text">> </p>
-                <p class="main-text">> i use artix btw.</p>
+                <p class="main-text">> i use arch btw.</p>
                 <p class="main-text">> Resume: <a href="https://github.com/jzlotek/resume/raw/master/resume.pdf" target="_blank" rel="noopener" class="resume-link">📄︁</a> </p>
                 <p class="main-text">> GitHub: <a href="https://github.com/jzlotek" target="_blank" rel="noopener" class="github-link"><img src="{{ url_for('static', path='img/gh.svg') }}" alt="GitHub Logo"></a> </p>
                 <p class="main-text">> rss: <a href="{{ url_for('rss') }}" target="_blank" rel="noopener" class="">atom</a> </p>
             </div>
         </div>
+        {% include 'blog_inner.html' %}
     </div>
 </div>
 

@@ -13,7 +13,7 @@
         </div>
 
         <div class="py-3">
-            <a href="{{ url_for('blog') }}" class="link-rounded">back</a>
+            <a href="{{ request.headers.referer }}" class="link-rounded">back</a>
         </div>
     </div>
 </div>

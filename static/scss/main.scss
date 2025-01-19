@@ -14,11 +14,10 @@
 
 :root {
     --bg: map-get($colors, "bg");
-    --muted: map-get($colors, "charcoal");
-    --accent: map-get($colors, "purple");
+    --muted: map-get($colors, "muted");
+    --accent: map-get($colors, "accent");
     --red: var(--accent);
     --danger: var(--accent);
-    font-size: 20px;
 
     @include larger('medium') {
         font-size: 24px;
@@ -37,6 +36,10 @@ body {
     color: map-get($colors, "white");
 }
 
+a {
+    color: map-get($colors, "accent");
+}
+
 .main {
     &-content {
         @include smaller('large') {
@@ -46,7 +49,7 @@ body {
 
     &-text {
         &::first-letter {
-            color: map-get($colors, "purple");
+            color: map-get($colors, "accent");
         }
     }
 }

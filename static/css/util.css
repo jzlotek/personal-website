@@ -28,6 +28,10 @@
   align-items: center;
 }
 
+.justify-left {
+  align-items: left;
+}
+
 .mt-0 {
   margin-top: 0;
 }

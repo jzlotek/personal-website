@@ -1,7 +1,7 @@
 {% if posts %}
 <table class="center full justify my-5">
     {% for key, value in posts.items() | sort(attribute='1.date', reverse=True) %}
-        <tr class="flex flex-v full-container">
+        <tr class="flex">
             <td>
             <a href="/blog/{{ key }}" class="link-rounded pb-1">
                 <span class="color-accent neon-hover">{{ value.date }}:</span>
